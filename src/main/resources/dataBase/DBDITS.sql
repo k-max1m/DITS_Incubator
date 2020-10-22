@@ -1,33 +1,60 @@
 CREATE DATABASE IF NOT EXISTS `dits`;
 USE `dits`;
 
+CREATE TABLE IF NOT EXISTS `dits`.`topic` (
+	`topicId` INT NOT NULL AUTO_INCREMENT,
+	`description` VARCHAR(255) DEFAULT NULL,
+	`name` VARCHAR(255) DEFAULT NULL,
+	PRIMARY KEY (`topicId`)
+);
+    
+CREATE TABLE IF NOT EXISTS `dits`.`test` (
+	`testId` INT NOT NULL AUTO_INCREMENT,
+	`name` VARCHAR(255) DEFAULT NULL,
+	`description` VARCHAR(255) DEFAULT NULL,
+	`topicId` INT NOT NULL,
+	PRIMARY KEY (`testId`),
+	FOREIGN KEY (`topicId`)
+    REFERENCES `topic` (`topicId`)
+);     
+
+
+CREATE TABLE IF NOT EXISTS  `dits`.`question` (
+	`questionId` INT NOT NULL AUTO_INCREMENT,
+	`description` VARCHAR(255) DEFAULT NULL,
+	`testId` INT NOT NULL,
+	PRIMARY KEY (`questionId`),
+	FOREIGN KEY (`testId`)
+    REFERENCES `test` (`testId`)
+);
+
 CREATE TABLE IF NOT EXISTS `dits`.`answer` (
     `answerId` INT NOT NULL AUTO_INCREMENT,
-    `description` VARCHAR(255) NULL,
+    `description` VARCHAR(255) DEFAULT NULL,
     `correct` BOOLEAN DEFAULT 0,
     `questionId` INT NOT NULL,
     PRIMARY KEY (`answerId`),
     FOREIGN KEY (`questionId`)
     REFERENCES question(`questionId`)
-  );
+);
 
 CREATE TABLE IF NOT EXISTS `dits`.`literature` (
     `literatureId` INT NOT NULL AUTO_INCREMENT,
-    `description` VARCHAR(255) NULL,
+    `description` VARCHAR(255) DEFAULT NULL,
     `questionId` INT NOT NULL,
     PRIMARY KEY (`literatureId`),
     FOREIGN KEY (`questionId`)
     REFERENCES question(`questionId`)
-  );
+);
 
 CREATE TABLE IF NOT EXISTS `dits`.`link` (
     `linkId` INT NOT NULL AUTO_INCREMENT,
-    `link` VARCHAR(255) NULL,
+    `link` VARCHAR(255) DEFAULT NULL,
     `literatureId` INT NOT NULL,
     PRIMARY KEY (`linkId`),
     FOREIGN KEY (`literatureId`) 
     REFERENCES literature(`literatureId`)
-  );
+);
   
 INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`) VALUES ('1', 'description1', '1', '1');
 INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`) VALUES ('2', 'description2', '2', '2');
@@ -63,12 +90,14 @@ INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('8', 'link8
 INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('9', 'link9', '9');
 INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('10', 'link10', '10');
 
-DROP PROCEDURE if exists stat;
-create procedure user_stat(id int) 
-	select 
-		COUNT(0) AS `all_answers`,
-		SUM(`statistic`.`correct`) AS `correct`,
-        (COUNT(`statistic`.`correct`) - SUM(`statistic`.`correct`)) AS `incorrect`
-	from `statistic`
-where `userId` = id;
+CREATE OR REPLACE VIEW `user_statistic` AS
+ SELECT
+        `user`.`userId` AS `userId`,
+        COUNT(*) AS `allAnswers`,
+        SUM(`statistic`.`correct`) AS `correctAnswers`,
+        COUNT(`statistic`.`correct`) - SUM(`statistic`.`correct`) AS `incorrectAnswers`
+    FROM
+        (`statistic`
+        JOIN `user` ON (`statistic`.`userId` = `user`.`userId`))
+    GROUP BY `statistic`.`userId`;
     
