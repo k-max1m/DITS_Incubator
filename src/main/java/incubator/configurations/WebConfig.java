@@ -32,9 +32,9 @@ public class WebConfig {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:8500/dits?serverTimezone=Europe/Moscow&useSSL=false");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/dits?serverTimezone=Europe/Moscow&useSSL=false");
         dataSource.setUsername("root");
-        dataSource.setPassword("Maxkozlov2mailru");
+        dataSource.setPassword("mrair2636");
         return dataSource;
     }
 
