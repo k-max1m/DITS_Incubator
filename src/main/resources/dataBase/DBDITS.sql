@@ -63,12 +63,14 @@ INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('8', 'link8
 INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('9', 'link9', '9');
 INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('10', 'link10', '10');
 
-DROP PROCEDURE if exists stat;
-create procedure user_stat(id int) 
-	select 
-		COUNT(0) AS `all_answers`,
-		SUM(`statistic`.`correct`) AS `correct`,
-        (COUNT(`statistic`.`correct`) - SUM(`statistic`.`correct`)) AS `incorrect`
-	from `statistic`
-where `userId` = id;
+CREATE OR REPLACE VIEW `user_statistic` AS
+ SELECT
+        `user`.`userId` AS `userId`,
+        COUNT(*) AS `allAnswers`,
+        SUM(`statistic`.`correct`) AS `correctAnswers`,
+        COUNT(`statistic`.`correct`) - SUM(`statistic`.`correct`) AS `incorrectAnswers`
+    FROM
+        (`statistic`
+        JOIN `user` ON (`statistic`.`userId` = `user`.`userId`))
+    GROUP BY `statistic`.`userId`;
     
