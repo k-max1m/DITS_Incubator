@@ -158,8 +158,8 @@ create procedure user_stat(id int)
 	from `statistic`
 where `userId` = id;
     
-DROP PROCEDURE if exists test_statistic;
-create procedure user_stat(id int) 
+DROP PROCEDURE if exists test_stat;
+create procedure test_stat(id int) 
 	select count(qs.answerId) from
 	(select * from statistic s join question q on s.questionId = q.questionId join answer a on s.questionId = a.questionId where testId = id) qs 
 	group by qs.correct;
