@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS `dits`.`topic` (
     PRIMARY KEY (`statisticId`),
     FOREIGN KEY question(`questionId`) 
     REFERENCES question(`questionId`)
-    FOREIGN KEY user(`userId`)
+    FOREIGN KEY (`userId`)
     REFERENCES user(`userId`)
   );
 
@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `dits`.`test` (
     PRIMARY KEY (`statisticId`),
     FOREIGN KEY question(`questionId`) 
     REFERENCES question(`questionId`)
-    FOREIGN KEY user(`userId`)
+    FOREIGN KEY (`userId`)
     REFERENCES user(`userId`)
   );
   
@@ -67,15 +67,15 @@ CREATE TABLE IF NOT EXISTS `dits`.`user` (
     );
 
 CREATE TABLE IF NOT EXISTS `dits`.`statistic` (
-    `statisticId` INT NOT NULL uniqueT,
+    `statisticId` INT NOT NULL unique,
     `date` date NULL,
     'correct'  boolean,
     'questionId' INT NOT NULL,
     'userId' INT NOT NULL,
     PRIMARY KEY (`statisticId`),
-    FOREIGN KEY question(`questionId`) 
+    FOREIGN KEY (`questionId`) 
     REFERENCES question(`questionId`)
-    FOREIGN KEY user(`userId`)
+    FOREIGN KEY (`userId`)
     REFERENCES user(`userId`)
   );
 
@@ -158,3 +158,8 @@ create procedure user_stat(id int)
 	from `statistic`
 where `userId` = id;
     
+DROP PROCEDURE if exists test_statistic;
+create procedure user_stat(id int) 
+	select count(qs.answerId) from
+	(select * from statistic s join question q on s.questionId = q.questionId join answer a on s.questionId = a.questionId where testId = id) qs 
+	group by qs.correct;
