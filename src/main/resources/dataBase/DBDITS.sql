@@ -1,7 +1,42 @@
 CREATE DATABASE IF NOT EXISTS `dits`;
 USE `dits`;
 
-CREATE TABLE IF NOT EXISTS `dits`.`answer` (
+CREATE TABLE IF NOT EXISTS `dits`.`topic` (
+    `statisticId` INT NOT NULL AUTO_INCREMENT,
+    `date` date NULL,
+    'correct'  boolean,
+    'questionId' INT NOT NULL,
+    'userId' INT NOT NULL,
+    PRIMARY KEY (`statisticId`),
+    FOREIGN KEY question(`questionId`) 
+    REFERENCES question(`questionId`)
+    FOREIGN KEY user(`userId`)
+    REFERENCES user(`userId`)
+  );
+
+CREATE TABLE IF NOT EXISTS `dits`.`test` (
+    `statisticId` INT NOT NULL AUTO_INCREMENT,
+    `date` date NULL,
+    'correct'  boolean,
+    'questionId' INT NOT NULL,
+    'userId' INT NOT NULL,
+    PRIMARY KEY (`statisticId`),
+    FOREIGN KEY question(`questionId`) 
+    REFERENCES question(`questionId`)
+    FOREIGN KEY user(`userId`)
+    REFERENCES user(`userId`)
+  );
+  
+  CREATE TABLE IF NOT EXISTS `dits`.`question` (
+    `linkId` INT NOT NULL AUTO_INCREMENT,
+    `link` VARCHAR(255) NULL,
+    `literatureId` INT NOT NULL,
+    PRIMARY KEY (`linkId`),
+    FOREIGN KEY (`literatureId`) 
+    REFERENCES literature(`literatureId`)
+  );
+  
+  CREATE TABLE IF NOT EXISTS `dits`.`answer` (
     `answerId` INT NOT NULL AUTO_INCREMENT,
     `description` VARCHAR(255) NULL,
     `correct` BOOLEAN DEFAULT 0,
@@ -9,6 +44,39 @@ CREATE TABLE IF NOT EXISTS `dits`.`answer` (
     PRIMARY KEY (`answerId`),
     FOREIGN KEY (`questionId`)
     REFERENCES question(`questionId`)
+  );
+
+CREATE TABLE IF NOT EXISTS `dits`.`role` (
+    `roleId` INT NOT NULL AUTO_INCREMENT,
+    'tutor' binary,
+    'user' binary,
+    'admin' binary,
+    PRIMARY KEY (`roleId`),
+    );
+
+CREATE TABLE IF NOT EXISTS `dits`.`user` (
+    `userId` INT NOT NULL AUTO_INCREMENT,
+    `firstName` varchar,
+    'lastName'  varchar,
+    'login' varchar,
+    'password' varchar,
+    'roleId'
+    PRIMARY KEY (`userId`),
+    FOREIGN KEY (`roleId`) 
+    REFERENCES role(`roleId`)
+    );
+
+CREATE TABLE IF NOT EXISTS `dits`.`statistic` (
+    `statisticId` INT NOT NULL AUTO_INCREMENT,
+    `date` date NULL,
+    'correct'  boolean,
+    'questionId' INT NOT NULL,
+    'userId' INT NOT NULL,
+    PRIMARY KEY (`statisticId`),
+    FOREIGN KEY question(`questionId`) 
+    REFERENCES question(`questionId`)
+    FOREIGN KEY user(`userId`)
+    REFERENCES user(`userId`)
   );
 
 CREATE TABLE IF NOT EXISTS `dits`.`literature` (
@@ -19,15 +87,15 @@ CREATE TABLE IF NOT EXISTS `dits`.`literature` (
     FOREIGN KEY (`questionId`)
     REFERENCES question(`questionId`)
   );
-
+  
 CREATE TABLE IF NOT EXISTS `dits`.`link` (
     `linkId` INT NOT NULL AUTO_INCREMENT,
     `link` VARCHAR(255) NULL,
     `literatureId` INT NOT NULL,
     PRIMARY KEY (`linkId`),
-    FOREIGN KEY (`literatureId`) 
+    FOREIGN KEY (`literatureId`)
     REFERENCES literature(`literatureId`)
-  );
+  );  
   
 INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`) VALUES ('1', 'description1', '1', '1');
 INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`) VALUES ('2', 'description2', '2', '2');
