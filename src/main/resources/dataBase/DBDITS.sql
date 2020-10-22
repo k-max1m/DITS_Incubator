@@ -2,29 +2,20 @@ CREATE DATABASE IF NOT EXISTS `dits`;
 USE `dits`;
 
 CREATE TABLE IF NOT EXISTS `dits`.`topic` (
-    `statisticId` INT NOT NULL unique,
-    `date` date NULL,
-    'correct'  boolean,
-    'questionId' INT NOT NULL,
-    'userId' INT NOT NULL,
-    PRIMARY KEY (`statisticId`),
-    FOREIGN KEY question(`questionId`) 
-    REFERENCES question(`questionId`)
-    FOREIGN KEY (`userId`)
-    REFERENCES user(`userId`)
-  );
+    `topicId` INT NOT NULL unique,
+    `discription` varchar,
+    `name`  varchar,
+    PRIMARY KEY (`topicId`)
+);
 
 CREATE TABLE IF NOT EXISTS `dits`.`test` (
-    `statisticId` INT NOT NULL unique,
-    `date` date NULL,
-    'correct'  boolean,
-    'questionId' INT NOT NULL,
-    'userId' INT NOT NULL,
-    PRIMARY KEY (`statisticId`),
-    FOREIGN KEY question(`questionId`) 
-    REFERENCES question(`questionId`)
-    FOREIGN KEY (`userId`)
-    REFERENCES user(`userId`)
+    `testId` INT NOT NULL unique,
+    `discription` varchar,
+    `name`  varchar,
+    `topicId` INT NOT NULL
+    PRIMARY KEY (`topicId`),
+    FOREIGN KEY (`topicId`) 
+    REFERENCES topic(`topicId`)
   );
   
   CREATE TABLE IF NOT EXISTS `dits`.`question` (
@@ -48,19 +39,19 @@ CREATE TABLE IF NOT EXISTS `dits`.`test` (
 
 CREATE TABLE IF NOT EXISTS `dits`.`role` (
     `roleId` INT NOT NULL unique,
-    'tutor' binary,
-    'user' binary,
-    'admin' binary,
+    `tutor` binary,
+    `user` binary,
+    `admin` binary,
     PRIMARY KEY (`roleId`),
     );
 
 CREATE TABLE IF NOT EXISTS `dits`.`user` (
     `userId` INT NOT NULL unique,
     `firstName` varchar,
-    'lastName'  varchar,
-    'login' varchar,
-    'password' varchar,
-    'roleId'
+    `lastName`  varchar,
+    `login` varchar,
+    `password` varchar,
+    `roleId` INT NOT NULL,
     PRIMARY KEY (`userId`),
     FOREIGN KEY (`roleId`) 
     REFERENCES role(`roleId`)
@@ -69,9 +60,9 @@ CREATE TABLE IF NOT EXISTS `dits`.`user` (
 CREATE TABLE IF NOT EXISTS `dits`.`statistic` (
     `statisticId` INT NOT NULL unique,
     `date` date NULL,
-    'correct'  boolean,
-    'questionId' INT NOT NULL,
-    'userId' INT NOT NULL,
+    `correct`  boolean,
+    `questionId` INT NOT NULL,
+    `userId` INT NOT NULL,
     PRIMARY KEY (`statisticId`),
     FOREIGN KEY (`questionId`) 
     REFERENCES question(`questionId`)
