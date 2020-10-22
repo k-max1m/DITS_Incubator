@@ -3,29 +3,37 @@ USE `dits`;
 
 CREATE TABLE IF NOT EXISTS `dits`.`topic` (
     `topicId` INT NOT NULL unique,
-    `discription` varchar,
-    `name`  varchar,
+    `discription` varchar(255),
+    `name`  varchar(255),
     PRIMARY KEY (`topicId`)
 );
 
+CREATE TABLE IF NOT EXISTS `dits`.`role` (
+    `roleId` INT NOT NULL unique,
+    `tutor` binary,
+    `user` binary,
+    `admin` binary,
+    PRIMARY KEY (`roleId`)
+    );
+
 CREATE TABLE IF NOT EXISTS `dits`.`test` (
     `testId` INT NOT NULL unique,
-    `discription` varchar,
-    `name`  varchar,
-    `topicId` INT NOT NULL
-    PRIMARY KEY (`topicId`),
+    `discription` varchar(255),
+    `name`  varchar(255),
+    `topicId` INT NOT NULL,
+    PRIMARY KEY (`testId`),
     FOREIGN KEY (`topicId`) 
-    REFERENCES topic(`topicId`)
+    REFERENCES `topic`(`topicId`)
   );
   
-  CREATE TABLE IF NOT EXISTS `dits`.`question` (
-    `linkId` INT NOT NULL unique,
-    `link` VARCHAR(255) NULL,
-    `literatureId` INT NOT NULL,
-    PRIMARY KEY (`linkId`),
-    FOREIGN KEY (`literatureId`) 
-    REFERENCES literature(`literatureId`)
-  );
+  CREATE TABLE IF NOT EXISTS  `dits`.`question` (
+	`questionId` INT NOT NULL unique,
+	`description` VARCHAR(255) NULL,
+	`testId` INT NOT NULL,
+	PRIMARY KEY (`questionId`),
+	FOREIGN KEY (`testId`)
+    REFERENCES `test` (`testId`)
+);
   
   CREATE TABLE IF NOT EXISTS `dits`.`answer` (
     `answerId` INT NOT NULL unique,
@@ -34,27 +42,19 @@ CREATE TABLE IF NOT EXISTS `dits`.`test` (
     `questionId` INT NOT NULL,
     PRIMARY KEY (`answerId`),
     FOREIGN KEY (`questionId`)
-    REFERENCES question(`questionId`)
+    REFERENCES `question`(`questionId`)
   );
-
-CREATE TABLE IF NOT EXISTS `dits`.`role` (
-    `roleId` INT NOT NULL unique,
-    `tutor` binary,
-    `user` binary,
-    `admin` binary,
-    PRIMARY KEY (`roleId`),
-    );
 
 CREATE TABLE IF NOT EXISTS `dits`.`user` (
     `userId` INT NOT NULL unique,
-    `firstName` varchar,
-    `lastName`  varchar,
-    `login` varchar,
-    `password` varchar,
+    `firstName` varchar(45) NULL,
+    `lastName`  varchar(45) NULL,
+    `login` varchar(255) NOT NULL,
+    `password` varchar(255) NOT NULL,
     `roleId` INT NOT NULL,
     PRIMARY KEY (`userId`),
     FOREIGN KEY (`roleId`) 
-    REFERENCES role(`roleId`)
+    REFERENCES `role`(`roleId`)
     );
 
 CREATE TABLE IF NOT EXISTS `dits`.`statistic` (
@@ -65,9 +65,9 @@ CREATE TABLE IF NOT EXISTS `dits`.`statistic` (
     `userId` INT NOT NULL,
     PRIMARY KEY (`statisticId`),
     FOREIGN KEY (`questionId`) 
-    REFERENCES question(`questionId`)
+    REFERENCES `question`(`questionId`),
     FOREIGN KEY (`userId`)
-    REFERENCES user(`userId`)
+    REFERENCES `user`(`userId`)
   );
 
 CREATE TABLE IF NOT EXISTS `dits`.`literature` (
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `dits`.`link` (
     `literatureId` INT NOT NULL,
     PRIMARY KEY (`linkId`),
     FOREIGN KEY (`literatureId`)
-    REFERENCES literature(`literatureId`)
+    REFERENCES `literature`(`literatureId`)
   );  
  
 INSERT INTO `dits`.`role` (`roleId`, `tutor`, `user`, `admin`) VALUES ('1', 'true', 'false', 'false');
