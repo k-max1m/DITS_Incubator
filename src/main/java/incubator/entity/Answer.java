@@ -1,10 +1,11 @@
 package incubator.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "answer")
-public class Answer {
+public class Answer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int answerId;
@@ -18,7 +19,12 @@ public class Answer {
     public Answer() {
     }
 
-    public Answer(String description, boolean correct, Question questionId) {
+    public Answer(String description, boolean correct) {
+        this.description = description;
+        this.correct = correct;
+    }
+
+    public Answer(String description, boolean correct, Question question) {
         this.correct = correct;
         this.description = description;
         this.question = question;

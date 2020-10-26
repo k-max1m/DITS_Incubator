@@ -1,10 +1,11 @@
 package incubator.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "literature")
-public class Literature {
+public class Literature implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int literatureId;

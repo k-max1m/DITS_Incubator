@@ -38,6 +38,8 @@ public class WebConfig {
         return dataSource;
     }
 
+
+
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -48,7 +50,8 @@ public class WebConfig {
         factoryBean.setJpaVendorAdapter(adapter);
 
         Properties jpaProp = new Properties();
-        jpaProp.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        jpaProp.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        jpaProp.put("hibernate.auto_quote_keyword", "true");
         factoryBean.setJpaProperties(jpaProp);
 
         return factoryBean;
