@@ -21,15 +21,6 @@
     </build>
     <packaging>war</packaging>
 
-<!--    <parent>-->
-<!--        <groupId>org.springframework.boot</groupId>-->
-<!--        <artifactId>spring-boot-starter-parent</artifactId>-->
-<!--        <version>2.3.4.RELEASE</version>-->
-<!--    </parent>-->
-<!--    <properties>-->
-<!--        <hibernate>6.0.0.Alpha6</hibernate>-->
-<!--        <spring>5.2.9.RELEASE</spring>-->
-<!--    </properties>-->
 
     <properties>
         <hibernate.version>5.4.22.Final</hibernate.version>
@@ -37,7 +28,6 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -78,6 +68,21 @@
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
             <version>2.3.4.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>5.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>5.4.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-taglibs</artifactId>
+            <version>5.4.1</version>
         </dependency>
 
         <dependency>

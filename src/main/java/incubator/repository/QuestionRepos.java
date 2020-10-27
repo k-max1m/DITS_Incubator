@@ -16,3 +16,4 @@ public interface QuestionRepos extends JpaRepository<Question, Integer> {
 
     Question findByDescription(String description);
 }
+
