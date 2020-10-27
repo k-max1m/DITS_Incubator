@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().loginPage("/login")
                 .usernameParameter("userName")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/")
+                .defaultSuccessUrl("/main")
                 .and()
                 .logout().permitAll().logoutSuccessUrl("/").invalidateHttpSession(true);
     }
