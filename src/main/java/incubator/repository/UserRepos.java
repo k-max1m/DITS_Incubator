@@ -13,5 +13,7 @@ public interface UserRepos extends JpaRepository<User,Integer> {
 
     User findByLogin(String login);
     List<User> getAll();
+    User getByUserId(int id);
+    List<User> getAllByRole(Role role);
 
 }

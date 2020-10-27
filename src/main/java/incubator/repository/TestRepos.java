@@ -11,6 +11,7 @@ import java.util.List;
 public interface TestRepos extends JpaRepository<Test, Integer> {
     List<Test> findByTopic(Topic topic);
 
-
     Test findByTestId(int id);
+    List<Test> getAllByName(String name);
+    List<Test> getAllByTopic(Topic topic);
 }
