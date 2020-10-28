@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import sun.plugin.liveconnect.SecurityContextHelper;
+//import sun.plugin.liveconnect.SecurityContextHelper;
 
 import java.util.Collection;
 import java.util.List;
@@ -24,6 +24,7 @@ public class MainController {
     
     @GetMapping("/main")
     public String main(){
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         List<? extends GrantedAuthority> collect = authorities.stream()

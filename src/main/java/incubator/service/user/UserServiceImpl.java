@@ -17,11 +17,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAll() {
-        return userRepos.getAll();
-    }
-
-    @Override
-    public List<User> getAllBy() {
-        return null;
+        return userRepos.getUserByUserIdNotNull();
     }
 }

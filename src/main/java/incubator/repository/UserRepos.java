@@ -12,7 +12,7 @@ import java.util.List;
 public interface UserRepos extends JpaRepository<User,Integer> {
 
     User findByLogin(String login);
-    List<User> getAll();
+    List<User> getUserByUserIdNotNull();
     User getByUserId(int id);
     List<User> getAllByRole(Role role);
 
