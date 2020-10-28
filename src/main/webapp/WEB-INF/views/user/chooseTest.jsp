@@ -6,22 +6,52 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Choose Theme</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 </head>
 <body>
-<select>
-    <option>Theme 1</option>
-    <option>Theme 2</option>
-</select>
-<br>
-<select>
-    <option>Test 1</option>
-    <option>Test 2</option>
-</select>
 <form action="/goToTest">
-    <input type="submit" value="Submit">
+    <select id="themes" name="themes">
+        <c:forEach items="${topics}" var="topic">
+            <option>${topic.name}</option>
+        </c:forEach>
+    </select>
+    <br>
+    <div>
+        <select id="tests" name="tests">
+            <option>Выберите тест</option>
+        </select>
+    </div>
+    <br>
+    <input type="submit" value="Пройти тестирование">
 </form>
+<script>
+    $().ready(function () {
+        $('#themes').change(function (event) {
+            $.ajax({
+                url: "/chooseTest",
+                type: "GET",
+                dataType: "json",
+                data: {topic: $(event.target).val()}
+            })
+                .done(function (data) {
+                    setTest(data)
+                })
+                .fail(function (xhr, status, error) {
+                    alert(xhr.responseText + '|/n' + status + '|/n' + error);
+                });
+        });
+    });
+    var setTest = function (data) {
+        $('#tests').find('option').remove();
+        $.each(data, function (index, value) {
+            $('#tests').append(new Option(value, value));
+        });
+    }
+</script>
 </body>
 </html>
