@@ -2,11 +2,12 @@ package incubator.service;
 
 import incubator.entity.Link;
 import incubator.repository.LinkRepos;
+import incubator.service.interfaces.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LinkService {
+public class LinkServiceImpl implements LinkService {
     @Autowired
     LinkRepos linkRepos;
 

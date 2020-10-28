@@ -2,11 +2,12 @@ package incubator.service;
 
 import incubator.entity.Role;
 import incubator.repository.RoleRepos;
+import incubator.service.interfaces.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RoleService {
+public class RoleServiceImpl implements RoleService {
     @Autowired
     private RoleRepos roleRepos;
 

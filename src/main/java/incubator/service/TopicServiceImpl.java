@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TopicService {
+public class TopicServiceImpl {
     @Autowired
     private TopicRepos topicRepos;
 
