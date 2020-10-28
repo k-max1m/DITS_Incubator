@@ -22,8 +22,11 @@
     </select>
     <br>
     <div>
-        <select id="tests" name="tests">
-            <option>Выберите тест</option>
+        <select id="tests" name="test">
+            <c:forEach items="${tests}" var="test">
+                <option>${test.name}</option>
+            </c:forEach>
+<%--            <option>Выберите тест</option>--%>
         </select>
     </div>
     <br>

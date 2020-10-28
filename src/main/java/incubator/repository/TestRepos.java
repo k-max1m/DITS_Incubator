@@ -12,4 +12,6 @@ public interface TestRepos extends JpaRepository<Test, Integer> {
     List<Test> findByTopic(Topic topic);
 
     Test findByTestId(int id);
+
+    Test findByName(String name);
 }

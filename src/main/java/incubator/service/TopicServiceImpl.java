@@ -1,4 +1,4 @@
-package incubator.service.user;
+package incubator.service;
 
 import incubator.entity.Topic;
 import incubator.repository.TopicRepos;

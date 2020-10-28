@@ -1,4 +1,4 @@
-package incubator.service.user;
+package incubator.service;
 
 import incubator.entity.Test;
 import incubator.entity.Topic;
@@ -28,5 +28,9 @@ public class TestServiceImpl {
         Topic topicToTests = topicRepos.findByName(topic);
         List<String> testsNames = testRepos.findByTopic(topicToTests).stream().map(Test::getName).collect(Collectors.toList());
         return testsNames;
+    }
+
+    public Test getTestByName(String name) {
+        return testRepos.findByName(name);
     }
 }
