@@ -19,4 +19,9 @@ public class UserServiceImpl implements UserService {
     public List<User> getAll() {
         return userRepos.getUserByUserIdNotNull();
     }
+    @Override
+    public User save(User user){
+        userRepos.save(user);
+        return user;
+    }
 }
