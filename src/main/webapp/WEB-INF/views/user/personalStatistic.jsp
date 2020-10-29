@@ -20,7 +20,8 @@
         <th>Процент правильно пройденных</th>
     </tr>
 </table>
-<form action="/user/home">
+<p>${stats.correctAnswers}</p>
+<form action="/homeUser">
     <input type="submit" placeholder="Home page">
 </form>
 </body>

@@ -17,7 +17,7 @@
     <div>${question.description}</div>
     <br>
     <c:forEach items="${answers}" var="answer">
-        <input type="radio" name="chooseAnswer" value="${answer.answerId}">${answer.description}<br>
+        <input type="radio" name="correct" value="${answer.correct}">${answer.description}<br>
     </c:forEach>
     <input type="hidden" name = "page" value="${page}">
     <input type="submit" placeholder="Next question">

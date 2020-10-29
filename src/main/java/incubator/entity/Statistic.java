@@ -1,11 +1,12 @@
 package incubator.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name="statistic")
-public class Statistic {
+public class Statistic implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int statisticId;
@@ -19,6 +20,13 @@ public class Statistic {
     private User user;
 
     public Statistic() {
+    }
+
+    public Statistic(Date date, boolean correct, Question question, User user) {
+        this.date = date;
+        this.correct = correct;
+        this.question = question;
+        this.user = user;
     }
 
     @Override
@@ -64,10 +72,11 @@ public class Statistic {
         this.user = user;
     }
 
-    public Statistic(Date date, boolean correct, Question question, User user) {
-        this.date = date;
-        this.correct = correct;
-        this.question = question;
-        this.user = user;
+    public int getStatisticId() {
+        return statisticId;
+    }
+
+    public void setStatisticId(int statisticId) {
+        this.statisticId = statisticId;
     }
 }

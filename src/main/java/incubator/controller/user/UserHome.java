@@ -26,8 +26,8 @@ public class UserHome {
         return "user/chooseTest";
     }
 
-    @GetMapping
+    @GetMapping("/personalStatistic")
     public String personalStatistic() {
-        return "user/personalStatistic";
+        return "redirect:/userStatistic";
     }
 }

@@ -10,9 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class TestPageController {
@@ -20,6 +25,7 @@ public class TestPageController {
     private AnswerService answerService;
     private TestServiceImpl testService;
     private List<Question> questionsList;
+    private Map<Question, Boolean> correctQuestion;
 
     @Autowired
     public TestPageController(QuestionService questionService, AnswerService answerService, TestServiceImpl testService) {
@@ -30,8 +36,8 @@ public class TestPageController {
 
     @GetMapping("/goToTest")
     public String goTest(@RequestParam String test, ModelMap map) {
+        correctQuestion = new HashMap<>();
         questionsList = questionService.getAllByTest(testService.getTestByName(test));
-        System.out.println(questionsList);
         map.put("question", questionsList.get(0));
         map.put("answers", answerService.getAllByQuestion(questionsList.get(0)));
         map.put("page", 1);
@@ -40,9 +46,15 @@ public class TestPageController {
     }
 
     @GetMapping("/nextPage")
-    public String getNextPage(@RequestParam Integer page, ModelMap map) {
+    public String getNextPage(@RequestParam Integer page, @RequestParam Boolean correct,
+                              ModelMap map, RedirectAttributes redirectAttributes) {
+        correctQuestion.put(questionsList.get(page - 1), correct);
         if (page >= questionsList.size()) {
-            return "user/resultPage";
+            Map<String, Object> redirectMap = new HashMap<>();
+            redirectMap.put("page", page);
+            redirectMap.put("correctQuestion", correctQuestion);
+            redirectAttributes.addFlashAttribute("redirectMap", redirectMap);
+            return "redirect:/resultTest";
         } else {
             Question question = questionsList.get(page);
             map.put("question", question);

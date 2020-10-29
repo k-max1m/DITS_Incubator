@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface LinkRepos extends JpaRepository<Link, Integer> {
-    List<Link> findLinkByLiterature(Literature literature);
+    List<Link> findByLiterature(Literature literature);
 
     Link findLinkByLinkId(int id);
 

@@ -10,9 +10,11 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -20,6 +22,7 @@ import java.util.Properties;
 @EnableWebMvc
 @ComponentScan("incubator")
 @EnableJpaRepositories("incubator.repository")
+@EnableTransactionManagement
 public class WebConfig {
 
     @Bean(name = "viewResolver")
@@ -53,18 +56,19 @@ public class WebConfig {
 
         Properties jpaProp = new Properties();
         jpaProp.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-        jpaProp.put("hibernate.auto_quote_keyword", "true");
+       // jpaProp.put("hibernate.auto_quote_keyword", "true");
         factoryBean.setJpaProperties(jpaProp);
 
         return factoryBean;
     }
 
     @Bean(name = "transactionManager")
-    public JpaTransactionManager transactionManager() {
+    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactoryBean().getNativeEntityManagerFactory());
+        transactionManager.setEntityManagerFactory(entityManagerFactory);//entityManagerFactoryBean().getNativeEntityManagerFactory());
         return transactionManager;
     }
+
     @Bean
     public UserDetailsService getUserDetailsService(){
         return new UserDetailServiceImpl();
