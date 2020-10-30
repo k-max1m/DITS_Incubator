@@ -11,6 +11,7 @@
     <title>User</title>
 </head>
 <body>
-adsasdadsa
+    <a href="/chooseTest">Выбор темы теста</a>
+    <a href="/personalStatistic">Вывод статистики</a>
 </body>
 </html>

@@ -5,15 +5,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class UserHome {
-
-    @GetMapping("/chooseTest")
-    public String chooseTest() {
-        return "user/chooseTest";
-    }
-
-    @GetMapping
-    public String personalStatistic() {
-        return "user/personalStatistic";
+public class ChooseTest {
+    @GetMapping("/goToTest")
+    public String goTest() {
+        return "user/testPage";
     }
 }
