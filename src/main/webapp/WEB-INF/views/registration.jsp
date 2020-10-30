@@ -11,12 +11,13 @@
     <title>Title</title>
 </head>
 <body>
-<form method="post" action="/registration">
-    <input type="text" name="FirstName">
-    <input type="text" name="LastName">
-    <input type="text" name="Login">
-    <input type="password" name="Password">
-    <input type="submit" name="submit">
+<form method="post" action="/registration" modelAttribute="registration">
+    <p>First Name<input type="text" name ="firstName"></p>
+    <p>Last Name<input type="text" name ="lastName"></p>
+    <p>Login<input type="text" name="login"></p>
+    <p>Password<input type="password" name="password"></p>
+    <input type="text" name="roleId" value="3" hidden>
+    <button type="submit">registration</button>
 </form>
 </body>
 </html>

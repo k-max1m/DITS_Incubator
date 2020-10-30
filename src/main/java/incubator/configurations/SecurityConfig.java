@@ -18,6 +18,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailServiceImpl userDetailService;
 
+    @Autowired
+    private CustomSuccessHandler customSuccessHandler;
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
@@ -29,13 +32,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/","/registration", "/login")
                 .not().fullyAuthenticated()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/tutor/**").hasAuthority("TUTOR")
-                .antMatchers("/user/**").hasAuthority("USER")
+                .antMatchers("/tutor/**").hasAnyAuthority("TUTOR","ADMIN")
+                .antMatchers("/user/**").hasAnyAuthority("USER","TUTOR","ADMIN")
                 .antMatchers("/").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().loginPage("/login")
-                .usernameParameter("userName")
+                .formLogin().loginProcessingUrl("/login")
+                .usernameParameter("login")
                 .passwordParameter("password")
                 .defaultSuccessUrl("/main")
                 .and()
@@ -44,6 +47,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-        auth.userDetailsService(userDetailService).passwordEncoder(bCryptPasswordEncoder());
+        auth.inMemoryAuthentication().passwordEncoder(bCryptPasswordEncoder())
+                .withUser("user").password(bCryptPasswordEncoder().encode("user")).roles("USER").and()
+                .withUser("admin").password(bCryptPasswordEncoder().encode("admin")).roles("ADMIN");
     }
 }

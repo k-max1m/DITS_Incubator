@@ -11,6 +11,7 @@
     <title>User</title>
 </head>
 <body>
+    <h1>Hello, ${"userName"}</h1>
     <a href="/chooseTest">Выбор темы теста</a>
     <a href="/personalStatistic">Вывод статистики</a>
 </body>

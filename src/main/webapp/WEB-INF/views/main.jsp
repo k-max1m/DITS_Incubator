@@ -13,5 +13,6 @@
 <body>
  <h1>It's a main page</h1>
 <a href="/login">Login</a>
+ <a href="/registration">Registration</a>
 </body>
 </html>

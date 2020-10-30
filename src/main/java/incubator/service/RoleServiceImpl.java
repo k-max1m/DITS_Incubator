@@ -12,4 +12,7 @@ public class RoleServiceImpl implements RoleService {
     private RoleRepos roleRepos;
 
     public Role getById(int id){ return roleRepos.findById(id).get();}
+
+    @Override
+    public Role getRoleById(int id) { return roleRepos.findById(id).get();}
 }

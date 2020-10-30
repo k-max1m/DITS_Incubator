@@ -2,7 +2,9 @@ package incubator.controller;
 
 import incubator.entity.User;
 import incubator.repository.UserRepos;
+import incubator.service.interfaces.RoleService;
 import incubator.service.user.GrantedAuthorityImpl;
+import incubator.service.user.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -19,6 +21,10 @@ import java.util.stream.Collectors;
 public class MainController {
     @Autowired
     UserRepos userRepos;
+    @Autowired
+    RoleService roleService;
+    @Autowired
+    UserDetailServiceImpl userDetailService;
 
     @GetMapping("/login")
     public String login() {
@@ -54,8 +60,10 @@ public class MainController {
         return "registration";
     }
     @PostMapping("/registration")
-    public String getRegistration(@ModelAttribute User user){
-        userRepos.save(user);
+    public String getRegistration(@RequestParam String firstName,@RequestParam String lastName,
+                                  @RequestParam String login, @RequestParam String password,@RequestParam int roleId){
+        User user = new User(firstName,lastName,login,password, roleService.getRoleById(roleId));
+        userDetailService.save(user);
         return this.main();
     }
 

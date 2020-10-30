@@ -14,6 +14,5 @@ public interface UserRepos extends JpaRepository<User,Integer> {
     List<User> getUserByUserIdNotNull();
     User getByUserId(int id);
     List<User> getAllByRole(Role role);
-    User save(User user);
 
 }

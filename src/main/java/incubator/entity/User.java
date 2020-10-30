@@ -12,6 +12,7 @@ public class User {
     private String login;
     private String password;
 
+
     @ManyToOne
     @JoinColumn(name="roleId")
     private Role role;
@@ -74,6 +75,7 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
 
     public User(String firstName, String lastName, String login, String password, Role role) {
         this.firstName = firstName;
