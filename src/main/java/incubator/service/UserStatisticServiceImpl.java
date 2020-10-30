@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -23,11 +24,11 @@ public class UserStatisticServiceImpl implements UserStatisticService {
     private UserRepos userRepos;
 
     @Override
-    public UserStatistic getUserStatistic() {
+    public List<UserStatistic> getUserStatistic() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
         User user = userRepos.findByLogin(userName);
         List<UserStatistic> all = userStatisticRepo.findAll();
-        return all.stream().filter(o -> o.getUserId() == user.getUserId()).findAny().orElse(null);
+        return all.stream().filter(o -> o.getUserId() == user.getUserId()).collect(Collectors.toList());
     }
 }

@@ -18,7 +18,7 @@ public class PersonalStatistic {
 
     @GetMapping("/userStatistic")
     public String statistic(ModelMap model) {
-        model.put("stats", statisticService.getUserStatistic());
+        model.put("statistic", statisticService.getUserStatistic());
         return "user/personalStatistic";
     }
 }

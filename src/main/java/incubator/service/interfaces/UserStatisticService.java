@@ -6,5 +6,5 @@ import incubator.entity.UserStatistic;
 import java.util.List;
 
 public interface UserStatisticService {
-    UserStatistic getUserStatistic();
+    List<UserStatistic> getUserStatistic();
 }

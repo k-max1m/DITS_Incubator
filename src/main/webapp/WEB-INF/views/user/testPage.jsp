@@ -20,7 +20,7 @@
         <input type="radio" name="correct" value="${answer.correct}">${answer.description}<br>
     </c:forEach>
     <input type="hidden" name = "page" value="${page}">
-    <input type="submit" placeholder="Next question">
+    <input type="submit" value="Next Page">
 </form>
 <a href="/logout">Выйти</a>
 </body>

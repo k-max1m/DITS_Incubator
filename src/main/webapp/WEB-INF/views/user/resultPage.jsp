@@ -39,8 +39,8 @@
 
 
 </table>
-<form action="/userHome">
-    <input type="submit" placeholder="Home page">
+<form action="/homeUser">
+    <input type="submit" value="HomePage">
 </form>
 
 </body>

@@ -12,6 +12,7 @@
 </head>
 <body>
     <a href="/chooseTopic">Выбор темы теста</a>
+    <br>
     <a href="/personalStatistic">Вывод статистики</a>
 </body>
 </html>

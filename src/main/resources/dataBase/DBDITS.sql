@@ -174,16 +174,24 @@ INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('7', 'link7
 INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('8', 'link8', '8');
 
 
-CREATE OR REPLACE VIEW `user_statistic` AS
- SELECT
-        `user`.`userId` AS `userId`,
-        COUNT(*) AS `allAnswers`,
-        SUM(`statistic`.`correct`) AS `correctAnswers`,
-        COUNT(`statistic`.`correct`) - SUM(`statistic`.`correct`) AS `incorrectAnswers`
+CREATE OR REPLACE VIEW `dits`.`user_statistic` AS
+    SELECT
+        `dits`.`statistic`.`statisticId` AS `id`,
+        `dits`.`user`.`userId` AS `userId`,
+        `dits`.`test`.`name` AS `testName`,
+        CONCAT_WS(' ',
+                `dits`.`user`.`firstName`,
+                `dits`.`user`.`lastName`) AS `firstAndLastName`,
+        `dits`.`question`.`description` AS `questionDescription`,
+        COUNT(0) AS `allAnswers`,
+        SUM(`dits`.`statistic`.`correct`) AS `correctAnswers`,
+        ((SUM(`dits`.`statistic`.`correct`) / COUNT(0)) * 100) AS `percent`
     FROM
-        (`statistic`
-        JOIN `user` ON (`statistic`.`userId` = `user`.`userId`))
-    GROUP BY `statistic`.`userId`;
+        (((`dits`.`statistic`
+        JOIN `dits`.`user` ON ((`dits`.`statistic`.`userId` = `dits`.`user`.`userId`)))
+        JOIN `dits`.`question` ON ((`dits`.`question`.`questionId` = `dits`.`statistic`.`questionId`)))
+        JOIN `dits`.`test` ON ((`dits`.`question`.`testId` = `dits`.`test`.`testId`)))
+    GROUP BY `dits`.`user`.`userId` , `dits`.`statistic`.`questionId`
     
     
 DROP PROCEDURE if exists test_stat;
