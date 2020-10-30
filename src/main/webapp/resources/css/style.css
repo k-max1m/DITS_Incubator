@@ -1,0 +1,37 @@
+.myCount {
+    position: center;
+    align-content: center;
+    align-items: center;
+    align-self: center;
+    text-align: center;
+    vertical-align: middle;
+    display: block;
+}
+
+.marginTop {
+    margin-top: 8%;
+}
+
+.myButton {
+    box-shadow: 0px 0px 0px 2px #9fb4f2;
+    background: #7892c2 linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+    border-radius:14px;
+    border:1px solid #4e6096;
+    display:inline-block;
+    cursor:pointer;
+    color:#ffffff;
+    font-family:Arial;
+    font-size:19px;
+    padding:13px 60px;
+    text-decoration:none;
+    text-shadow:0px 1px 0px #283966;
+}
+
+.myButton:hover {
+    background: #476e9e linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+}
+
+.myButton:active {
+    position:relative;
+    top:1px;
+}
