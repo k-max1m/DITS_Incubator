@@ -20,8 +20,7 @@ public class UserServiceImpl implements UserService {
         return userRepos.getUserByUserIdNotNull();
     }
     @Override
-    public User save(User user){
-        userRepos.save(user);
-        return user;
+    public User findByLogin(String login){
+        return userRepos.findByLogin(login);
     }
 }

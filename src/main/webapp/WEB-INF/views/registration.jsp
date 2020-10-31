@@ -12,11 +12,11 @@
 </head>
 <body>
 <form method="post" action="/registration" modelAttribute="registration">
-    <p>First Name<input type="text" name ="firstName"></p>
-    <p>Last Name<input type="text" name ="lastName"></p>
-    <p>Login<input type="text" name="login"></p>
-    <p>Password<input type="password" name="password"></p>
-    <input type="text" name="roleId" value="3" hidden>
+    <p>First Name<input type="text" name ="firstName" placeholder="firstName"></p>
+    <p>Last Name<input type="text" name ="lastName" placeholder="lastName"></p>
+    <p>Login<input type="text" name="login" placeholder="login"></p>
+    <p>Password<input type="password" name="password" placeholder="password"></p>
+    <input type="text" name="roleId" value="3" placeholder="roleId" hidden>
     <button type="submit">registration</button>
 </form>
 </body>

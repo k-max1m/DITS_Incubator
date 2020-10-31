@@ -76,6 +76,15 @@ public class User {
         this.role = role;
     }
 
+    public void setRole(int roleId) {
+        if(roleId == 1) this.getRole().setAdmin('1');
+        else this.getRole().setAdmin('0');
+        if(roleId == 2) this.getRole().setTutor('1');
+        else this.getRole().setTutor('0');
+        if(roleId == 3) this.getRole().setUser('1');
+        else this.getRole().setUser('0');
+    }
+
 
     public User(String firstName, String lastName, String login, String password, Role role) {
         this.firstName = firstName;
@@ -83,5 +92,12 @@ public class User {
         this.login = login;
         this.password = password;
         this.role = role;
+    }
+    public User(String firstName, String lastName, String login, String password, int roleId) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.login = login;
+        this.password = password;
+        this.setRole(roleId);
     }
 }

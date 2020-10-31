@@ -17,4 +17,5 @@ public interface StatisticRepos extends JpaRepository<Statistic,Integer> {
     List<Statistic> getAllByDate(Date date);
     List<Statistic> getAllByUser(User user);
     List<Statistic> getAllByQuestion(Question question);
+    List<Statistic> getAllByQuestionAndUser(Question question, User user);
 }

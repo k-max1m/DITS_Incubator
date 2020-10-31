@@ -10,6 +10,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 //import sun.plugin.liveconnect.SecurityContextHelper;
 
@@ -27,7 +28,8 @@ public class MainController {
     UserDetailServiceImpl userDetailService;
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("userForm", new User());
         return "login";
     }
     
@@ -55,10 +57,12 @@ public class MainController {
     public String mainPage() {
         return "main";
     }
+
     @GetMapping("/registration")
     public String registration(){
         return "registration";
     }
+
     @PostMapping("/registration")
     public String getRegistration(@RequestParam String firstName,@RequestParam String lastName,
                                   @RequestParam String login, @RequestParam String password,@RequestParam int roleId){
