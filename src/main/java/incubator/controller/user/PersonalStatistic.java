@@ -38,7 +38,7 @@ public class PersonalStatistic {
         for(Test test: tests){
             HashMap<Question,List<Statistic>> qStat = new HashMap<>();
             for(Question question: questionService.getAllByTest(test)){
-                qStat.put(question,statisticService.getByQuestinAndUser(question,user));
+                qStat.put(question,statisticService.getByQuestionAndUser(question,user));
             }
             statistics.put(test,qStat);
         }

@@ -34,7 +34,7 @@ public class ResultTest {
         List<Question> questions = questionService.getAllByTest(testService.getById(testId));
         Map<Question, List<Statistic>> statisticMap = new HashMap<>();
         for(Question question: questions){
-            statisticMap.put(question, statisticService.getByQuestinAndUser(question,user));
+            statisticMap.put(question, statisticService.getByQuestionAndUser(question,user));
         }
         return "user/resultPage";
     }
