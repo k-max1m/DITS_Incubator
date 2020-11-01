@@ -9,5 +9,6 @@ import java.util.List;
 public interface StatisticService {
     Statistic getById(int id);
     List<Statistic> getByUser(User user);
-    List<Statistic> getByQuestinAndUser(Question question, User user);
+    List<Statistic> getByQuestionAndUser(Question question, User user);
+    List<Statistic> getByQuestion(Question question);
 }
