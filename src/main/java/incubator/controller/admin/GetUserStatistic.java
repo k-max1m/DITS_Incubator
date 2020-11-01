@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/admin/userStatistic")
-public class UserStatistic {
+public class GetUserStatistic {
     @Autowired
     UserService userService;
     @Autowired
