@@ -18,7 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/admin/testStatistic")
-public class TestStatistic {
+public class GetTestStatistic {
     @Autowired
     StatisticService statisticService;
     @Autowired
