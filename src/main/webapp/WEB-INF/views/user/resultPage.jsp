@@ -11,37 +11,42 @@
 <html>
 <head>
     <title>Result page</title>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
-<table>
-    <tr>
-        <th>Question</th>
-        <th>Right</th>
-        <th>Recommend literature</th>
-        <th>Link to literature</th>
-    </tr>
-    <c:forEach items="${resultList}" var="result">
-        <tr>
-            <td>${result.get(0)}</td>
-            <td>${result.get(1)}</td>
-            <td>
-                <c:forEach items="${result.get(2)}" var="res">
-                    <p>${res}</p>
-                </c:forEach>
-            </td>
-            <td>
-                <c:forEach items="${result.get(3)}" var="res">
-                    <p><a href="${res}">${res}</a></p>
-                </c:forEach>
-            </td>
-        </tr>
-    </c:forEach>
-
-
-</table>
-<form action="/homeUser">
-    <input type="submit" value="HomePage">
-</form>
-
+<div class="myCount">
+    <div>
+        <table>
+            <tr>
+                <th>Question</th>
+                <th>Right</th>
+                <th>Recommend literature</th>
+                <th>Link to literature</th>
+            </tr>
+            <c:forEach items="${resultList}" var="result">
+                <tr>
+                    <td>${result.get(0)}</td>
+                    <td>${result.get(1)}</td>
+                    <td>
+                        <c:forEach items="${result.get(2)}" var="res">
+                            <p>${res}</p>
+                        </c:forEach>
+                    </td>
+                    <td>
+                        <c:forEach items="${result.get(3)}" var="res">
+                            <p><a href="${res}">${res}</a></p>
+                        </c:forEach>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+    <form action="/homeUser">
+        <input class="myButton" type="submit" value="HomePage">
+    </form>
+    <div class="exit">
+        <a class="link" href="/logout">Выйти</a>
+    </div>
+</div>
 </body>
 </html>

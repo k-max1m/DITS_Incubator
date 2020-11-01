@@ -12,26 +12,36 @@
 <head>
     <title>Choose Theme</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
-<form action="/goToTest">
-    <select id="themes" name="themes">
-        <c:forEach items="${topics}" var="topic">
-            <option>${topic.name}</option>
-        </c:forEach>
-    </select>
-    <br>
-    <div>
-        <select id="tests" name="test">
-            <c:forEach items="${tests}" var="test">
-                <option>${test.name}</option>
-            </c:forEach>
-<%--            <option>Выберите тест</option>--%>
-        </select>
+<div class="myCount">
+    <div class="picture">
+        <img src="<c:url value="/resources/human1.png"/>" alt="human1.png">
     </div>
-    <br>
-    <input type="submit" value="Пройти тестирование">
-</form>
+    <div class="chooseTest">
+        <div>
+            <form action="/goToTest">
+                <select class="select" id="themes" name="themes">
+                    <c:forEach items="${topics}" var="topic">
+                        <option>${topic.name}</option>
+                    </c:forEach>
+                </select>
+                <br>
+                <select class="select" id="tests" name="test">
+                    <c:forEach items="${tests}" var="test">
+                        <option>${test.name}</option>
+                    </c:forEach>
+                </select>
+                <br>
+                <input class="myButton" type="submit" value="Пройти тестирование">
+            </form>
+        </div>
+    </div>
+    <div class="exit">
+        <a class="link" href="/logout">Выйти</a>
+    </div>
+</div>
 <script>
     $().ready(function () {
         $('#themes').change(function (event) {

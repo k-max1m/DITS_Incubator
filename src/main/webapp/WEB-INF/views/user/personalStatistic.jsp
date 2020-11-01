@@ -11,29 +11,33 @@
 <html>
 <head>
     <title>Personal Statistic</title>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
-<table>
-    <tr>
-        <th>Ф.И.О</th>
-        <th>Название теста</th>
-        <th>Вопрос</th>
-        <th>Пройдено всего</th>
-        <th>Процент правильно пройденных</th>
-    </tr>
-    <c:forEach items="${statistic}" var="userStatistic">
-        <tr>
-            <td>${userStatistic.firstAndLastName}</td>
-            <td>${userStatistic.testName}</td>
-            <td>${userStatistic.questionDescription}</td>
-            <td>${userStatistic.allAnswers}</td>
-            <td>${userStatistic.percent}</td>
-        </tr>
-    </c:forEach>
-
-</table>
-<form action="/homeUser">
-    <input type="submit" value="Home page">
-</form>
+<div class="myCount">
+    <div>
+        <table>
+            <tr>
+                <th>Ф.И.О</th>
+                <th>Название теста</th>
+                <th>Вопрос</th>
+                <th>Пройдено всего</th>
+                <th>Процент правильно пройденных</th>
+            </tr>
+            <c:forEach items="${statistic}" var="userStatistic">
+                <tr>
+                    <td>${userStatistic.firstAndLastName}</td>
+                    <td>${userStatistic.testName}</td>
+                    <td>${userStatistic.questionDescription}</td>
+                    <td>${userStatistic.allAnswers}</td>
+                    <td>${userStatistic.percent}</td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
+    <form action="/homeUser">
+        <input class="myButton" type="submit" value="Home page">
+    </form>
+</div>
 </body>
 </html>

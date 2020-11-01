@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `dits`.`user` (
     );
 
 CREATE TABLE IF NOT EXISTS `dits`.`statistic` (
-    `statisticId` INT NOT NULL unique,
+    `statisticId` INT NOT NULL AUTO_INCREMENT,
     `date` date NULL,
     `correct`  boolean,
     `questionId` INT NOT NULL,
@@ -93,9 +93,11 @@ INSERT INTO `dits`.`topic` (`topicId`, `description`, `name`) VALUES ('2', 'desc
 
 INSERT INTO `dits`.`role` (`roleId`, `tutor`, `user`, `admin`) VALUES ('1', '1', '0', '0');
 INSERT INTO `dits`.`role` (`roleId`, `tutor`, `user`, `admin`) VALUES ('2', '0', '0', '1');
+INSERT INTO `dits`.`role` (`roleId`, `tutor`, `user`, `admin`) VALUES ('3', '0', '1', '0');
 
 INSERT INTO `dits`.`user` (`userId`, `firstName`, `lastName`, `login`, `password`, `roleId`) VALUES ('1', 'Jora', 'Jenkins', 'JJen','JlikeChe1', '1');
 INSERT INTO `dits`.`user` (`userId`, `firstName`, `lastName`, `login`, `password`, `roleId`) VALUES ('2', 'Artem', 'Rudiy', 'ArRudiy','Pushka02', '2');
+INSERT INTO `dits`.`user` (`userId`, `firstName`, `lastName`, `login`, `password`, `roleId`) VALUES ('3', 'Max', 'Kozlov', 'max','$2y$12$8V6Q41rmGsoSvZMWwsFtM.zJfpU2YvjHYADBv/Gm4movt8T2nkoa2', '3');
 
 INSERT INTO `dits`.`test` (`testId`, `name`, `description`, `topicId`) VALUES ('1', 'test1', 'description1', '1');
 INSERT INTO `dits`.`test` (`testId`, `name`, `description`, `topicId`) VALUES ('2', 'test2', 'description2', '1');
@@ -191,7 +193,7 @@ CREATE OR REPLACE VIEW `dits`.`user_statistic` AS
         JOIN `dits`.`user` ON ((`dits`.`statistic`.`userId` = `dits`.`user`.`userId`)))
         JOIN `dits`.`question` ON ((`dits`.`question`.`questionId` = `dits`.`statistic`.`questionId`)))
         JOIN `dits`.`test` ON ((`dits`.`question`.`testId` = `dits`.`test`.`testId`)))
-    GROUP BY `dits`.`user`.`userId` , `dits`.`statistic`.`questionId`
+    GROUP BY `dits`.`user`.`userId` , `dits`.`statistic`.`questionId`;
     
     
 DROP PROCEDURE if exists test_stat;

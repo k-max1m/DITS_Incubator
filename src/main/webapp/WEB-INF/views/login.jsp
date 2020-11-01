@@ -18,9 +18,9 @@
 <div class="myCount">
     <div class="marginTop">
         <security:form action="/login" method="POST">
-            <input type="text" name="userName" placeholder="Логин"/>
+            <input class="input-style" type="text" name="userName" placeholder="Логин"/>
             <br>
-            <input type="password" name="password" placeholder="Пароль"/>
+            <input class="input-style" type="password" name="password" placeholder="Пароль"/>
             <br>
             <input name="submit" class="myButton" type="submit" value="Войти"/>
         </security:form>

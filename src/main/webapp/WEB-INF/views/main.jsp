@@ -6,12 +6,18 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Main</title>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
- <h1>It's a main page</h1>
-<a href="/login">Login</a>
+
+<div class="chooseTest">
+    <h1>Нажмите Login</h1>
+    <a class="link" href="/login">Login</a>
+</div>
+
 </body>
 </html>

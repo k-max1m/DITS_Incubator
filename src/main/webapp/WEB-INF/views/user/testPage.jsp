@@ -11,17 +11,41 @@
 <html>
 <head>
     <title>Test Page</title>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
-<form action="/nextPage" method="get">
-    <div>${question.description}</div>
-    <br>
-    <c:forEach items="${answers}" var="answer">
-        <input type="radio" name="correct" value="${answer.correct}">${answer.description}<br>
-    </c:forEach>
-    <input type="hidden" name = "page" value="${page}">
-    <input type="submit" value="Next Page">
-</form>
-<a href="/logout">Выйти</a>
+<div class="myCount">
+    <div class="picture">
+        <img src="<c:url value="/resources/human1.png"/>" alt="human1.png">
+    </div>
+    <div class="chooseTest">
+        <form class="form" action="/nextPage" method="get">
+            <div>
+                <label>
+                    <input class="input-style" type="text" value="${question.description}">
+                </label>
+            </div>
+            <div>
+                <c:forEach items="${answers}" var="answer">
+                    <div>
+                        <label class="answer">
+                            <input type="radio" name="correct" value="${answer.correct}">
+                            <span>${answer.description}</span>
+                        </label>
+                    </div>
+                    <br>
+                </c:forEach>
+            </div>
+            <div>
+                <input type="hidden" name="page" value="${page}">
+                <input class="myButton" type="submit" value="Next Page">
+            </div>
+        </form>
+    </div>
+    <div class="exit">
+        <a class="link" href="/logout">Выйти</a>
+    </div>
+</div>
+
 </body>
 </html>

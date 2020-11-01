@@ -21,6 +21,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailServiceImpl userDetailService;
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring()
+                .antMatchers("/resources/css/**");
+    }
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
@@ -30,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception{
 
         httpSecurity.csrf().disable().authorizeRequests()
-                .antMatchers("/","/registration", "/login", "/resources/css/**")
+                .antMatchers("/","/registration", "/login")
                 .not().fullyAuthenticated()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
                 .antMatchers("/tutor/**").hasAuthority("TUTOR")
