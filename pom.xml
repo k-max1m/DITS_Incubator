@@ -17,7 +17,6 @@
                     <target>8</target>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
     <packaging>war</packaging>
@@ -29,7 +28,6 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -115,6 +113,4 @@
             <version>${hibernate.version}</version>
         </dependency>
     </dependencies>
-
-
 </project>

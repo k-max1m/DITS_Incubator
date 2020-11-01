@@ -11,9 +11,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-//import sun.plugin.liveconnect.SecurityContextHelper;
 
+//import javax.validation.Valid;
+import java.security.Principal;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,8 +30,8 @@ public class MainController {
     UserDetailServiceImpl userDetailService;
 
     @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("userForm", new User());
+    public String login() {
+
         return "login";
     }
     
@@ -54,21 +56,35 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String mainPage() {
+    public String mainPage(Principal principal, Model model) {
+        if(principal != null && principal.getName() != null){
+            model.addAttribute("userName", principal.getName());
+        }
+        else{
+            model.addAttribute("userName", "sameName");
+        }
+
         return "main";
     }
 
     @GetMapping("/registration")
-    public String registration(){
+    public String registration(Model model){
+        model.addAttribute("userForm", new User());
         return "registration";
     }
 
     @PostMapping("/registration")
-    public String getRegistration(@RequestParam String firstName,@RequestParam String lastName,
-                                  @RequestParam String login, @RequestParam String password,@RequestParam int roleId){
-        User user = new User(firstName,lastName,login,password, roleService.getRoleById(roleId));
-        userDetailService.save(user);
-        return this.main();
+    public String getRegistration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model){
+        if (bindingResult.hasErrors()) {
+            return "registration";
+        }
+        if (!userDetailService.save(userForm)){
+            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+            return "registration";
+        }
+
+        return "redirect:/user/user_home";
+
     }
 
 }

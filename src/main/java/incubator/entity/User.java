@@ -85,7 +85,30 @@ public class User {
         else this.getRole().setUser('0');
     }
 
-
+    public void setAdmin(int value){
+        if(value == 0){
+            this.getRole().setAdmin('0');
+        }
+        else{
+            this.getRole().setAdmin('1');
+        }
+    }
+    public void setTutor(int value){
+        if(value == 0){
+            this.getRole().setTutor('0');
+        }
+        else{
+            this.getRole().setTutor('1');
+        }
+    }
+    public void setUser(int value){
+        if(value == 0){
+            this.getRole().setUser('0');
+        }
+        else{
+            this.getRole().setUser('1');
+        }
+    }
     public User(String firstName, String lastName, String login, String password, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;

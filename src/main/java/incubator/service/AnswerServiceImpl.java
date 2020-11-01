@@ -34,4 +34,9 @@ public class AnswerServiceImpl implements AnswerService {
     public Answer getByDescription(String description) {
         return answerRepos.findByDescription(description);
     }
+
+    @Override
+    public void save(Answer answer) {
+        answerRepos.save(answer);
+    }
 }

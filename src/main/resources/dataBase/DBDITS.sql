@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS `dits`
 CREATE DATABASE IF NOT EXISTS `dits`;
 USE `dits`;
 
@@ -23,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `dits`.`test` (
     `topicId` INT NOT NULL,
     PRIMARY KEY (`testId`),
     FOREIGN KEY (`topicId`) 
-    REFERENCES `topic`(`topicId`)
+    REFERENCES `topic`(`topicId`) ON DELETE CASCADE
   );
   
   CREATE TABLE IF NOT EXISTS  `dits`.`question` (
@@ -32,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `dits`.`test` (
 	`testId` INT NOT NULL,
 	PRIMARY KEY (`questionId`),
 	FOREIGN KEY (`testId`)
-    REFERENCES `test` (`testId`)
+    REFERENCES `test` (`testId`) ON DELETE CASCADE
 );
   
   CREATE TABLE IF NOT EXISTS `dits`.`answer` (
@@ -40,9 +41,10 @@ CREATE TABLE IF NOT EXISTS `dits`.`test` (
     `description` VARCHAR(255) NULL,
     `correct` BOOLEAN DEFAULT 0,
     `questionId` INT NOT NULL,
+    `quserId` INT NOT NULL,
     PRIMARY KEY (`answerId`),
     FOREIGN KEY (`questionId`)
-    REFERENCES `question`(`questionId`)
+    REFERENCES `question`(`questionId`) ON DELETE CASCADE
   );
 
 CREATE TABLE IF NOT EXISTS `dits`.`user` (
@@ -54,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `dits`.`user` (
     `roleId` INT NOT NULL,
     PRIMARY KEY (`userId`),
     FOREIGN KEY (`roleId`) 
-    REFERENCES `role`(`roleId`)
+    REFERENCES `role`(`roleId`) ON DELETE CASCADE
     );
 
 CREATE TABLE IF NOT EXISTS `dits`.`statistic` (
@@ -65,9 +67,9 @@ CREATE TABLE IF NOT EXISTS `dits`.`statistic` (
     `userId` INT NOT NULL,
     PRIMARY KEY (`statisticId`),
     FOREIGN KEY (`questionId`) 
-    REFERENCES `question`(`questionId`),
+    REFERENCES `question`(`questionId`) ON DELETE CASCADE,
     FOREIGN KEY (`userId`)
-    REFERENCES `user`(`userId`)
+    REFERENCES `user`(`userId`) ON DELETE CASCADE
   );
 
 CREATE TABLE IF NOT EXISTS `dits`.`literature` (
@@ -76,7 +78,7 @@ CREATE TABLE IF NOT EXISTS `dits`.`literature` (
     `questionId` INT NOT NULL,
     PRIMARY KEY (`literatureId`),
     FOREIGN KEY (`questionId`)
-    REFERENCES `question`(`questionId`)
+    REFERENCES `question`(`questionId`) ON DELETE CASCADE
   );
   
 CREATE TABLE IF NOT EXISTS `dits`.`link` (
@@ -85,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `dits`.`link` (
     `literatureId` INT NOT NULL,
     PRIMARY KEY (`linkId`),
     FOREIGN KEY (`literatureId`)
-    REFERENCES `literature`(`literatureId`)
+    REFERENCES `literature`(`literatureId`) ON DELETE CASCADE
   );  
  
 INSERT INTO `dits`.`topic` (`topicId`, `description`, `name`) VALUES ('1', 'description1', 'topic1');

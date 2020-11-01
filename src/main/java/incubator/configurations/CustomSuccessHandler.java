@@ -1,5 +1,6 @@
 package incubator.configurations;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -16,7 +17,6 @@ import java.util.List;
 
 @Component
 public class CustomSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-
     private RedirectStrategy redirectStrategy;
     {
         redirectStrategy = new DefaultRedirectStrategy();

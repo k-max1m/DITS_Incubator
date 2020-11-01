@@ -5,19 +5,23 @@
   Time: 16:04
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/tags/form" %>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
-<form method="post" action="/registration" modelAttribute="registration">
-    <p>First Name<input type="text" name ="firstName" placeholder="firstName"></p>
-    <p>Last Name<input type="text" name ="lastName" placeholder="lastName"></p>
-    <p>Login<input type="text" name="login" placeholder="login"></p>
-    <p>Password<input type="password" name="password" placeholder="password"></p>
-    <input type="text" name="roleId" value="3" placeholder="roleId" hidden>
+<security:form method="post" action="/registration" modelAttribute="userForm">
+    <h2>Registration</h2>
+    <div>
+        <security:input type="text" path="firstName" name ="firstName" placeholder="firstName"></security:input>
+        <security:input type="text" path="lastName" name ="lastName" placeholder="lastName"></security:input>
+        <security:input type="text" path="login" name="login" placeholder="login"></security:input>
+        <security:input type="password" path="password" name="password" placeholder="password"></security:input>
+        <security:input type="text" path="role" name="roleId" value="3" placeholder="roleId" hidden="true"></security:input>
+    </div>
     <button type="submit">registration</button>
-</form>
+</security:form>
 </body>
 </html>

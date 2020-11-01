@@ -28,6 +28,7 @@ public class PersonalStatistic {
     QuestionService questionService;
     @Autowired
     TestService testService;
+
     @GetMapping("/home")
     public String homePage(Principal principal, Model model) {
         String login = principal.getName();

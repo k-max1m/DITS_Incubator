@@ -17,6 +17,7 @@ public class TestServiceImpl implements TestService {
 
     @Override
     public List<Test> getAll() {
-        return testRepos.findAllByTestIdExists();
+        return testRepos.findAllByTestIdNotNull();
     }
+
 }
