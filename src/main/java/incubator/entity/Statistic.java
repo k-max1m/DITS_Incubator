@@ -1,11 +1,12 @@
 package incubator.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name="statistic")
-public class Statistic {
+public class Statistic implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int statisticId;
