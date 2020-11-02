@@ -48,7 +48,7 @@ public class MainController {
         if(collect.size() > 1){
             List<String> roles = new ArrayList<>();
             for(GrantedAuthority gA: authorities){
-                roles.add(gA.toString());
+                roles.add("/" + gA.toString().toLowerCase() + "/home");
             }
             model.addAttribute("roles", roles);
             return "chooseRole";
