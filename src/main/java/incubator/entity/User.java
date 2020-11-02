@@ -4,6 +4,8 @@ import javax.persistence.*;
 @Entity
 @Table(name="user")
 public class User {
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
@@ -20,6 +22,9 @@ public class User {
     public User() {
     }
 
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
     @Override
     public String toString() {
         return "User{" +
@@ -101,7 +106,7 @@ public class User {
             this.getRole().setTutor('1');
         }
     }
-    public void setUser(int value){
+    public void setRoleUser(int value){
         if(value == 0){
             this.getRole().setUser('0');
         }

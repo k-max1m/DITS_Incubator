@@ -63,7 +63,7 @@ public class MainController {
         else{
             model.addAttribute("userName", "sameName");
         }
-
+        model.addAttribute("users",userRepos.getUserByUserIdNotNull());
         return "main";
     }
 
@@ -75,15 +75,18 @@ public class MainController {
 
     @PostMapping("/registration")
     public String getRegistration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model){
+        userForm.setRole(roleService.getRoleById(3));
+        userDetailService.save(userForm);
         if (bindingResult.hasErrors()) {
+            model.addAttribute("usernameError", bindingResult.getAllErrors().toString());
             return "registration";
         }
         if (!userDetailService.save(userForm)){
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }
-
-        return "redirect:/user/user_home";
+        model.addAttribute("usernameError", "all will be ok!");
+        return "registration";
 
     }
 

@@ -3,14 +3,14 @@ CREATE DATABASE IF NOT EXISTS `dits`;
 USE `dits`;
 
 CREATE TABLE IF NOT EXISTS `dits`.`topic` (
-    `topicId` INT NOT NULL unique,
+    `topicId` INT NOT NULL unique AUTO_INCREMENT,
     `description` varchar(255),
     `name`  varchar(255),
     PRIMARY KEY (`topicId`)
 );
 
 CREATE TABLE IF NOT EXISTS `dits`.`role` (
-    `roleId` INT NOT NULL unique,
+    `roleId` INT NOT NULL unique AUTO_INCREMENT,
     `tutor` binary,
     `user` binary,
     `admin` binary,
@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS `dits`.`role` (
     );
 
 CREATE TABLE IF NOT EXISTS `dits`.`test` (
-    `testId` INT NOT NULL unique,
+    `testId` INT NOT NULL unique AUTO_INCREMENT,
 	`name`  varchar(255),
     `description` varchar(255),
     `topicId` INT NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `dits`.`test` (
   );
   
   CREATE TABLE IF NOT EXISTS  `dits`.`question` (
-	`questionId` INT NOT NULL unique,
+	`questionId` INT NOT NULL unique AUTO_INCREMENT,
 	`description` VARCHAR(255) NULL,
 	`testId` INT NOT NULL,
 	PRIMARY KEY (`questionId`),
@@ -95,6 +95,7 @@ INSERT INTO `dits`.`topic` (`topicId`, `description`, `name`) VALUES ('2', 'desc
 
 INSERT INTO `dits`.`role` (`roleId`, `tutor`, `user`, `admin`) VALUES ('1', '1', '0', '0');
 INSERT INTO `dits`.`role` (`roleId`, `tutor`, `user`, `admin`) VALUES ('2', '0', '0', '1');
+INSERT INTO `dits`.`role` (`roleId`, `tutor`, `user`, `admin`) VALUES ('3', '0', '1', '0');
 
 INSERT INTO `dits`.`user` (`firstName`, `lastName`, `login`, `password`, `roleId`) VALUES ('Jora', 'Jenkins', 'JJen','JlikeChe1', '1');
 INSERT INTO `dits`.`user` (`firstName`, `lastName`, `login`, `password`, `roleId`) VALUES ('Artem', 'Rudiy', 'ArRudiy','Pushka02', '2');

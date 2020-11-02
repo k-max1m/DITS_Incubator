@@ -5,9 +5,10 @@ import incubator.repository.TestRepos;
 import incubator.service.interfaces.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Transactional
 @Service
 public class TestServiceImpl implements TestService {
     @Autowired

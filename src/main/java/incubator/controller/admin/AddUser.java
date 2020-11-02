@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/admin/setUser")
+@RequestMapping("/admin/addUser")
 public class AddUser {
     @Autowired
     UserService userService;

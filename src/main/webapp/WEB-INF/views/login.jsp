@@ -6,6 +6,7 @@
 </head>
 <body>
 <h1>It's a login page!</h1>
+<%=request.getAttribute("usernameError")%>
 <security:form action="/login" method="POST">
     <input type="text" name="userName" placeholder="username"/>
     <input type="password" name="password" placeholder="password"/>

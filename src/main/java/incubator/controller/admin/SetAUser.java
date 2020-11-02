@@ -10,20 +10,24 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/admin/setUser")
-public class SetUser {
+public class SetAUser {
     @Autowired
     UserService userService;
     @Autowired
     UserDetailServiceImpl userDetailService;
-
+    @GetMapping("/")
+    public String chooseToSet(Model model){
+        model.addAttribute(userService.getAll());
+        return "admin/setUser";
+    }
     @GetMapping("/{uId}")
-    public String setUser(@PathVariable int uId, Model model){
+    public String getUserToSet(@PathVariable int uId, Model model){
         User user = userService.getById(uId);
         model.addAttribute("user", user);
         return "admin/setUser";
     }
     @PostMapping("/{uId}")
-    public String setUser(@PathVariable int uId,
+    public String setAUser(@PathVariable int uId,
                           @ModelAttribute("userForm") User userForm, Model model){
         User user = userService.getById(uId);
         user.setRole(userForm.getRole());
@@ -32,6 +36,11 @@ public class SetUser {
         user.setLastName(userForm.getLastName());
         user.setLogin(userForm.getLogin());
         model.addAttribute("result", "user was set");
+        return "admin/setUser";
+    }
+    @PostMapping("/delete/{uId}")
+    public String deleteUser(@PathVariable int uId, Model model){
+        userService.deleteUserById(uId);
         return "admin/setUser";
     }
 }

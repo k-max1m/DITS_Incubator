@@ -1,4 +1,5 @@
-<%--
+<%@ page import="incubator.entity.User" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Korona
   Date: 25.10.2020
@@ -12,6 +13,9 @@
 </head>
 <body>
  <h1>It's a main page, <%=request.getAttribute("userName")%></h1>
+ <%for(User user:(List<User>) request.getAttribute("users")) {%>
+ <p><%=user.toString()%></p>
+ <%}%>
 <a href="/login">Login</a>
  <a href="/registration">Registration</a>
 </body>
