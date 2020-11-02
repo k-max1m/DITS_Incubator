@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 //import javax.validation.Valid;
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,14 +37,20 @@ public class MainController {
     }
     
     @GetMapping("/main")
-    public String main(){
+    public String main(Model model){
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         List<? extends GrantedAuthority> collect = authorities.stream()
                 .peek(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
+
         if(collect.size() > 1){
+            List<String> roles = new ArrayList<>();
+            for(GrantedAuthority gA: authorities){
+                roles.add(gA.toString());
+            }
+            model.addAttribute("roles", roles);
             return "chooseRole";
         }
         if (collect.contains(new GrantedAuthorityImpl("USER"))) {

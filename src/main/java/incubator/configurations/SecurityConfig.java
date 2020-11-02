@@ -16,14 +16,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+
     @Autowired
     private UserDetailServiceImpl userDetailService;
 
-    @Autowired
-    private CustomSuccessHandler customSuccessHandler;
-
     @Override
-    public void configure(WebSecurity web) throws Exception {
+    public void configure(WebSecurity web) {
         web.ignoring()
                 .antMatchers("/resources/css/**");
     }
@@ -35,26 +34,30 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
+
         httpSecurity.csrf().disable().authorizeRequests()
                 .antMatchers("/","/registration", "/login")
                 .not().fullyAuthenticated()
                 .antMatchers("/admin/**").hasAuthority("ADMIN")
-                .antMatchers("/tutor/**").hasAnyAuthority("TUTOR","ADMIN")
-                .antMatchers("/user/**").hasAnyAuthority("USER","TUTOR","ADMIN")
+                .antMatchers("/tutor/**").hasAuthority("TUTOR")
+                .antMatchers("/user/**").hasAuthority("USER")
+                .antMatchers("/user/**").hasAnyAuthority("USER", "ADMIN")
+                .antMatchers("/user/**", "/tutor/**").hasAnyAuthority("USER", "TUTOR")
+                .antMatchers("/admin/**", "/tutor/**").hasAnyAuthority("TUTOR", "ADMIN")
+                .antMatchers("/**").hasAnyAuthority("USER", "ADMIN", "TUTOR")
                 .antMatchers("/").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login")
-                .usernameParameter("username")
+                .usernameParameter("userName")
                 .passwordParameter("password")
+                .defaultSuccessUrl("/main")
                 .and()
                 .logout().permitAll().logoutSuccessUrl("/").invalidateHttpSession(true);
     }
 
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
-        auth.inMemoryAuthentication().passwordEncoder(bCryptPasswordEncoder())
-                .withUser("user").password(bCryptPasswordEncoder().encode("user")).roles("USER").and()
-                .withUser("admin").password(bCryptPasswordEncoder().encode("admin")).roles("ADMIN");
+        auth.userDetailsService(userDetailService).passwordEncoder(bCryptPasswordEncoder());
     }
 }
