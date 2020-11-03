@@ -1,6 +1,6 @@
 package incubator.configurations;
 
-import incubator.service.user.UserDetailServiceImpl;
+import incubator.service.serviceForSecurity.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

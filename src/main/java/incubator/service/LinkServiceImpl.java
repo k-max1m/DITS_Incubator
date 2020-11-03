@@ -14,8 +14,12 @@ import java.util.List;
 @Service
 @Transactional
 public class LinkServiceImpl implements LinkService {
-    @Autowired
     private LinkRepos linkRepos;
+
+    @Autowired
+    public LinkServiceImpl(LinkRepos linkRepos) {
+        this.linkRepos = linkRepos;
+    }
 
     @Override
     public List<Link> getAllByLiterature(List<Literature> literature) {

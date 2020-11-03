@@ -12,8 +12,12 @@ import java.util.List;
 
 @Controller
 public class ChooseTest {
-    @Autowired
     private TestServiceImpl testService;
+
+    @Autowired
+    public ChooseTest(TestServiceImpl testService) {
+        this.testService = testService;
+    }
 
     @GetMapping("/chooseTest")
     @ResponseBody

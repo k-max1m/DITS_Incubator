@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class PersonalStatistic {
-    @Autowired
     private UserStatisticService statisticService;
+
+    @Autowired
+    public PersonalStatistic(UserStatisticService statisticService) {
+        this.statisticService = statisticService;
+    }
+
     @GetMapping("/user/home")
     public String homePage() {
         return "user/user_home";

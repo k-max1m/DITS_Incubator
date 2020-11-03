@@ -12,11 +12,15 @@ import java.util.List;
 
 @Controller
 public class UserHome {
-    @Autowired
     private TopicServiceImpl topicService;
 
-    @Autowired
     private TestServiceImpl testService;
+
+    @Autowired
+    public UserHome(TopicServiceImpl topicService, TestServiceImpl testService) {
+        this.topicService = topicService;
+        this.testService = testService;
+    }
 
     @GetMapping("/chooseTopic")
     public String chooseTest(ModelMap map) {
