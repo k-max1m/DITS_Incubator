@@ -35,26 +35,27 @@ public class UserDetailServiceImpl implements UserDetailsService {
         }
         Collection<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         Role role = user.getRole();
-        if(role.getUser() == '1'){
+        if (role.getTutor() == '1' && role.getAdmin() == '1' && role.getUser() == '1') {
+            grantedAuthorities.add(new GrantedAuthorityImpl("TUTOR"));
+            grantedAuthorities.add(new GrantedAuthorityImpl("ADMIN"));
+            grantedAuthorities.add(new GrantedAuthorityImpl("USER"));
+        } else if (role.getTutor() == '1' && role.getAdmin() == '1') {
+            grantedAuthorities.add(new GrantedAuthorityImpl("TUTOR"));
+            grantedAuthorities.add(new GrantedAuthorityImpl("ADMIN"));
+        } else  if (role.getUser() == '1' && role.getTutor() == '1') {
+            grantedAuthorities.add(new GrantedAuthorityImpl("TUTOR"));
+            grantedAuthorities.add(new GrantedAuthorityImpl("USER"));
+        } else if (role.getUser() == '1' && role.getAdmin() == '1') {
+            grantedAuthorities.add(new GrantedAuthorityImpl("USER"));
+            grantedAuthorities.add(new GrantedAuthorityImpl("ADMIN"));
+        } else if(role.getUser() == '1'){
             grantedAuthorities.add(new GrantedAuthorityImpl("USER"));
         } else if(role.getAdmin() == '1'){
             grantedAuthorities.add(new GrantedAuthorityImpl("ADMIN"));
         } else if(role.getTutor() == '1'){
             grantedAuthorities.add(new GrantedAuthorityImpl("TUTOR"));
-        } else if (role.getUser() == '1' && role.getAdmin() == '1') {
-            grantedAuthorities.add(new GrantedAuthorityImpl("USER"));
-            grantedAuthorities.add(new GrantedAuthorityImpl("ADMIN"));
-        } else if (role.getUser() == '1' && role.getTutor() == '1') {
-            grantedAuthorities.add(new GrantedAuthorityImpl("TUTOR"));
-            grantedAuthorities.add(new GrantedAuthorityImpl("ADMIN"));
-        } else if (role.getTutor() == '1' && role.getAdmin() == '1') {
-            grantedAuthorities.add(new GrantedAuthorityImpl("TUTOR"));
-            grantedAuthorities.add(new GrantedAuthorityImpl("ADMIN"));
-        } else if (role.getTutor() == '1' && role.getAdmin() == '1' && role.getUser() == '1') {
-            grantedAuthorities.add(new GrantedAuthorityImpl("TUTOR"));
-            grantedAuthorities.add(new GrantedAuthorityImpl("ADMIN"));
-            grantedAuthorities.add(new GrantedAuthorityImpl("USER"));
         }
+
 
         return new org.springframework.security.core.userdetails.User(user.getLogin(),user.getPassword(),grantedAuthorities);
     }

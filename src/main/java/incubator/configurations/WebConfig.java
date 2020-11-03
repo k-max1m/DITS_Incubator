@@ -27,6 +27,10 @@ import java.util.Properties;
 @EnableJpaRepositories("incubator.repository")
 @EnableTransactionManagement
 public class WebConfig implements WebMvcConfigurer {
+    private String url = "jdbc:mysql://localhost:8500/dits?serverTimezone=Europe/Moscow&useSSL=false";
+    private String driverClassName = "com.mysql.jdbc.Driver";
+    private String userName = "root";
+    private String password = "Maxkozlov2mailru";
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -44,10 +48,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/dits?serverTimezone=Europe/Moscow&useSSL=false");
-        dataSource.setUsername("root");
-        dataSource.setPassword("Maxkozlov2mailru");
+        dataSource.setDriverClassName(driverClassName);
+        dataSource.setUrl(url);
+        dataSource.setUsername(userName);
+        dataSource.setPassword(password);
         return dataSource;
     }
 
@@ -64,7 +68,6 @@ public class WebConfig implements WebMvcConfigurer {
 
         Properties jpaProp = new Properties();
         jpaProp.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-       // jpaProp.put("hibernate.auto_quote_keyword", "true");
         factoryBean.setJpaProperties(jpaProp);
 
         return factoryBean;

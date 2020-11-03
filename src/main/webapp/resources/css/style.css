@@ -64,6 +64,13 @@
     margin-right: 30%;
 }
 
+.chooseRole {
+    position: relative;
+    float: right;
+    margin-top: 18%;
+    margin-right: 18%;
+}
+
 .marginBottom {
     margin-bottom: 2px;
 }

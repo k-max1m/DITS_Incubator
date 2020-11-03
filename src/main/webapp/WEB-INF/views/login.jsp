@@ -12,10 +12,13 @@
 <html>
 <head>
     <title>login</title>
-  <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
 <div class="myCount">
+    <c:if test="${param.error != null}">
+        <label class="link">Неправильно введён логин или пароль, либо аккаунт не зарегестрирован</label>
+    </c:if>
     <div class="marginTop">
         <security:form action="/login" method="POST">
             <input class="input-style" type="text" name="userName" placeholder="Логин"/>
