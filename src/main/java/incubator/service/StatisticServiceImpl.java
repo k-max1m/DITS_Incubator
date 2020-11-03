@@ -30,4 +30,9 @@ public class StatisticServiceImpl implements StatisticService {
         return statisticRepos.getAllByQuestion(question);
     }
 
+    @Override
+    public void save(Statistic statistic) {
+        statisticRepos.save(statistic);
+    }
+
 }

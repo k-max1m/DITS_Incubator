@@ -11,4 +11,5 @@ public interface StatisticService {
     List<Statistic> getByUser(User user);
     List<Statistic> getByQuestionAndUser(Question question, User user);
     List<Statistic> getByQuestion(Question question);
+    void save(Statistic statistic);
 }

@@ -16,14 +16,14 @@ public class AddTopic {
     @Autowired
     TopicService topicService;
 
-    @GetMapping
+    @GetMapping("/")
     public String addTopic(){
         return "admin/addTopic";
     }
-    @PostMapping
+    @PostMapping("/")
     public String addTopic(@RequestParam String name, @RequestParam String description, Model model){
         topicService.save(new Topic(name,description));
-        model.addAttribute("result", "topic was added");
+        model.addAttribute("result", "topic was added successfully");
         return "admin/addTopic";
     }
 }

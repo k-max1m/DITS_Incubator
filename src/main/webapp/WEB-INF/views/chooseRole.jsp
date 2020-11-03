@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
     Choose role for login:

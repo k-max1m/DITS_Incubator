@@ -35,4 +35,9 @@ public class LiteratureServiceImpl implements LiteratureService {
     public Literature getByDescription(String description) {
         return literatureRepos.findByDescription(description);
     }
+
+    @Override
+    public void save(Literature literature) {
+        literatureRepos.save(literature);
+    }
 }

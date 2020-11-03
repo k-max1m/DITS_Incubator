@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Main</title>
+    <link type="text/css" rel="stylesheet" href="<c:url value="/resources/css/style.css"/>"/>
 </head>
 <body>
  <h1>It's a main page, <%=request.getAttribute("userName")%></h1>

@@ -24,7 +24,7 @@ public class AddUser {
     @PostMapping("/")
     public String setUser(@ModelAttribute("userForm") User userForm, Model model) {
         userDetailService.save(userForm);
-        model.addAttribute("result", "user was added");
+        model.addAttribute("result", "user was added successfully");
         return "admin/addUser";
     }
 }

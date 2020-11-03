@@ -7,10 +7,13 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Admin Home</title>
-</head>
-<body>
-Home
-</body>
+    <head>
+        <title>Admin Home</title>
+    </head>
+    <body>
+        <a href="/admin/addQuestion/">Add Question</a>
+        <a href="/admin/addTest/">Add Test</a>
+        <a href="/admin/addUser/">Add User</a>
+        <a href="/admin/addTopic">Add Topic</a>
+    </body>
 </html>
