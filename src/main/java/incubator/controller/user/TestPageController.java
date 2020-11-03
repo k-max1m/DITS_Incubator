@@ -6,6 +6,7 @@ import incubator.entity.Test;
 import incubator.service.TestServiceImpl;
 import incubator.service.interfaces.AnswerService;
 import incubator.service.interfaces.QuestionService;
+import incubator.service.interfaces.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,12 +24,12 @@ import java.util.Map;
 public class TestPageController {
     private QuestionService questionService;
     private AnswerService answerService;
-    private TestServiceImpl testService;
+    private TestService testService;
     private List<Question> questionsList;
     private Map<Question, Boolean> correctQuestion;
 
     @Autowired
-    public TestPageController(QuestionService questionService, AnswerService answerService, TestServiceImpl testService) {
+    public TestPageController(QuestionService questionService, AnswerService answerService, TestService testService) {
         this.questionService = questionService;
         this.answerService = answerService;
         this.testService = testService;

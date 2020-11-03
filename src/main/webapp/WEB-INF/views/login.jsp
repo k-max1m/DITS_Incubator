@@ -19,7 +19,7 @@
     <c:if test="${param.error != null}">
         <label class="link">Неправильно введён логин или пароль, либо аккаунт не зарегестрирован</label>
     </c:if>
-    <div class="marginTop">
+    <div class="loginForm">
         <security:form action="/login" method="POST">
             <input class="input-style" type="text" name="userName" placeholder="Логин"/>
             <br>

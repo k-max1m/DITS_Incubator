@@ -1,6 +1,7 @@
 package incubator.controller.user;
 
 import incubator.service.TestServiceImpl;
+import incubator.service.interfaces.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -12,10 +13,10 @@ import java.util.List;
 
 @Controller
 public class ChooseTest {
-    private TestServiceImpl testService;
+    private TestService testService;
 
     @Autowired
-    public ChooseTest(TestServiceImpl testService) {
+    public ChooseTest(TestService testService) {
         this.testService = testService;
     }
 
