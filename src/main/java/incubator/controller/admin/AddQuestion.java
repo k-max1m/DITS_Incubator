@@ -23,9 +23,9 @@ public class AddQuestion {
         return("admin/addQuestion");
     }
     @PostMapping("/")
-    public String addQuestion(@RequestParam String description, @RequestParam int testId, Model model){
-        Test test = testService.getById(testId);
-        questionService.save(new Question(description,test));
+    public String addQuestion(@ModelAttribute("questionForm") Question questionForm,
+                              Model model){
+        questionService.save(questionForm);
         model.addAttribute("result","question added successfully");
         return("admin/addQuestion");
     }

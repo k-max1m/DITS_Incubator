@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller
-@RequestMapping("/admin/addQuestion")
+@RequestMapping("/admin/setQuestion")
 public class SetQuestion {
     @Autowired
     TestService testService;
@@ -23,11 +23,19 @@ public class SetQuestion {
         model.addAttribute("question", questionService.getByQuestionId(qId));
         return("admin/setQuestion");
     }
-    @PostMapping("/{qId}")
-    public String addQuestion(@RequestParam String description, @RequestParam int testId, Model model,
-                              @PathVariable String qId){
-        Test test = testService.getById(testId);
-        questionService.save(new Question(description,test));
+    @PostMapping("/{qId}/setDescription")
+    public String setDescription(@RequestParam String description,  Model model,
+                              @PathVariable int qId){
+        Question question = questionService.getByQuestionId(qId);
+        question.setDescription(description);
+        model.addAttribute("result","question added successfully");
+        return("admin/setQuestion");
+    }
+    @PostMapping("/{qId}/setDescription")
+    public String addQuestion(@RequestParam int testId, Model model,
+                              @PathVariable int qId){
+        Question question = questionService.getByQuestionId(qId);
+        question.setTest(testService.getById(testId));
         model.addAttribute("result","question added successfully");
         return("admin/setQuestion");
     }
