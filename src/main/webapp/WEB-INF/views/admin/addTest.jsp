@@ -5,7 +5,7 @@
         <title>Add Test</title>
     </head>
     <body>
-        <h1>It's page for test adding!</h1>
+        <h1>Add new Test!</h1>
         <% if(request.getAttribute("result") != null) { %>
         <%= request.getAttribute("result")%>
         <%}%>
