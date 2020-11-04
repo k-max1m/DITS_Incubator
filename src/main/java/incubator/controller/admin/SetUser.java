@@ -2,7 +2,7 @@ package incubator.controller.admin;
 
 import incubator.entity.User;
 import incubator.service.interfaces.UserService;
-import incubator.service.user.UserDetailServiceImpl;
+import incubator.service.serviceForSecurity.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;

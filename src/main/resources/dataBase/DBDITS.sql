@@ -190,7 +190,8 @@ CREATE OR REPLACE VIEW `dits`.`user_statistic` AS
         `dits`.`question`.`description` AS `questionDescription`,
         COUNT(0) AS `allAnswers`,
         SUM(`dits`.`statistic`.`correct`) AS `correctAnswers`,
-        ((SUM(`dits`.`statistic`.`correct`) / COUNT(0)) * 100) AS `percent`
+        ROUND(((SUM(`dits`.`statistic`.`correct`) / COUNT(0)) * 100),
+                2) AS `percent`
     FROM
         (((`dits`.`statistic`
         JOIN `dits`.`user` ON ((`dits`.`statistic`.`userId` = `dits`.`user`.`userId`)))

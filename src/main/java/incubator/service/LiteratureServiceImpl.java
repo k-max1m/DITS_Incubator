@@ -12,9 +12,12 @@ import java.util.List;
 @Service
 @Transactional
 public class LiteratureServiceImpl implements LiteratureService {
+    private LiteratureRepos literatureRepos;
 
     @Autowired
-    private LiteratureRepos literatureRepos;
+    public LiteratureServiceImpl(LiteratureRepos literatureRepos) {
+        this.literatureRepos = literatureRepos;
+    }
 
     @Override
     public List<Literature> getAllLiterature() {

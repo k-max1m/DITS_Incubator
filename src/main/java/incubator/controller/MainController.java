@@ -1,9 +1,10 @@
 package incubator.controller;
 
+
 import incubator.entity.User;
 import incubator.repository.UserRepos;
 import incubator.service.interfaces.RoleService;
-import incubator.service.user.UserDetailServiceImpl;
+import incubator.service.serviceForSecurity.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

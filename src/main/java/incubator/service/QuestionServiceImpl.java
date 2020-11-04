@@ -14,8 +14,12 @@ import java.util.List;
 @Transactional
 public class QuestionServiceImpl implements QuestionService {
 
-    @Autowired
     private QuestionRepos questionRepos;
+
+    @Autowired
+    public QuestionServiceImpl(QuestionRepos questionRepos) {
+        this.questionRepos = questionRepos;
+    }
 
     @Override
     public List<Question> getAllQuestion() {

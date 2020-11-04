@@ -12,9 +12,12 @@ import java.util.List;
 @Service
 @Transactional
 public class AnswerServiceImpl implements AnswerService {
+    private AnswerRepos answerRepos;
 
     @Autowired
-    private AnswerRepos answerRepos;
+    public AnswerServiceImpl(AnswerRepos answerRepos) {
+        this.answerRepos = answerRepos;
+    }
 
     @Override
     public List<Answer> getAllAnswer() {

@@ -15,11 +15,15 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class TestServiceImpl implements TestService {
-    @Autowired
     private TestRepos testRepos;
 
-    @Autowired
     private TopicRepos topicRepos;
+
+    @Autowired
+    public TestServiceImpl(TestRepos testRepos, TopicRepos topicRepos) {
+        this.testRepos = testRepos;
+        this.topicRepos = topicRepos;
+    }
 
     public Test getById(int id){return testRepos.findById(id).get();}
 

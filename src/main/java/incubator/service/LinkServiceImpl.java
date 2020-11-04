@@ -8,17 +8,23 @@ import incubator.service.interfaces.LinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
 public class LinkServiceImpl implements LinkService {
-    @Autowired
     private LinkRepos linkRepos;
 
+    private LiteratureRepos literatureRepos;
+
     @Autowired
-    LiteratureRepos literatureRepos;
+    public LinkServiceImpl(LinkRepos linkRepos, LiteratureRepos literatureRepos) {
+        this.linkRepos = linkRepos;
+        this.literatureRepos = literatureRepos;
+    }
+
 
     @Override
     public List<Link> getAllByLiterature(List<Literature> literature) {
@@ -28,8 +34,9 @@ public class LinkServiceImpl implements LinkService {
     }
 
 
-
-    public Link getById(int id){return linkRepos.findById(id).get();}
+    public Link getById(int id) {
+        return linkRepos.findById(id).get();
+    }
 
     @Override
     public void save(Link link) {

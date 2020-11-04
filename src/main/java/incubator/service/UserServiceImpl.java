@@ -1,4 +1,4 @@
-package incubator.service.user;
+package incubator.service;
 
 import incubator.entity.User;
 import incubator.repository.UserRepos;
@@ -8,20 +8,25 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-@Transactional
+
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepos userRepos;
 
-    public User getById(int id){ return userRepos.findById(id).get();}
+    public User getById(int id) {
+        return userRepos.findById(id).get();
+    }
+
 
     @Override
     public List<User> getAll() {
         return userRepos.getUserByUserIdNotNull();
     }
+
     @Override
-    public User findByLogin(String login){
+    public User findByLogin(String login) {
         return userRepos.findByLogin(login);
     }
 

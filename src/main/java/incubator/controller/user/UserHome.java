@@ -16,11 +16,16 @@ import java.security.Principal;
 
 @Controller
 public class UserHome {
-    @Autowired
     private TopicService topicService;
 
-    @Autowired
     private TestService testService;
+
+    @Autowired
+    public UserHome(TopicService topicService, TestService testService) {
+        this.topicService = topicService;
+        this.testService = testService;
+    }
+
 
     @GetMapping("/chooseTopic")
     public String chooseTest(ModelMap map) {

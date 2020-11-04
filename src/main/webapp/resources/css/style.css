@@ -7,6 +7,14 @@
     display: block;
 }
 
+.loginForm {
+    width: 300px;
+    margin-top: 15%;
+    margin-left: auto;
+    margin-right: auto;
+    word-wrap: break-word;
+}
+
 .marginTop {
     margin-top: 15%;
 }
@@ -37,7 +45,7 @@
 }
 
 .input-style {
-    padding: 15px;
+    padding: 12px;
     font-size: 20px;
     border-width: 1px;
     border-color: #4e82be;
@@ -47,6 +55,10 @@
     border-style: solid;
     border-radius: 10px;
     margin-bottom: 20px;
+    width: 100%;
+    height: auto;
+    font-family: Arial, serif;
+    resize: none;
 }
 
 .input-style:focus {
@@ -61,7 +73,7 @@
     position: relative;
     float: right;
     margin-top: 18%;
-    margin-right: 30%;
+    margin-right: 25%;
 }
 
 .chooseRole {
@@ -111,7 +123,18 @@
     margin-bottom: 20px;
 }
 
+.hidden {
+    display: none;
+}
+
 .answer {
+    width: 100%;
+    height: auto;
+    display: flex;
+}
+
+.answer label {
+    padding: 11px;
     font-size: 20px;
     border-width: 1px;
     border-color: #4e82be;
@@ -120,13 +143,25 @@
     color: #4e82be;
     border-style: solid;
     border-radius: 10px;
-    width: 80%;
-    height: 30px;
+    width: 100%;
+    outline: none;
+    word-wrap: break-word;
+}
+
+
+input[type="radio"] {
+    display: none;
+}
+
+input[type="radio"]:checked + label {
+    background: #7892c2;
+    color: white;
+    border-color: red;
 }
 
 .form {
-    width: 300px;
-    height: 300px;
+    width: 450px;
+    height: auto;
 }
 
 .exit {

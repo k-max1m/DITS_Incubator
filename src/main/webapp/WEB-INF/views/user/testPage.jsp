@@ -22,15 +22,13 @@
         <form class="form" action="/nextPage" method="get">
             <div>
                 <label>
-                    <input class="input-style" type="text" value="${question.description}">
+                    <textarea class="input-style" readonly>${question.description}</textarea>
                 </label>
-            </div>
-            <div>
                 <c:forEach items="${answers}" var="answer">
-                    <div>
-                        <label class="answer">
-                            <input type="radio" name="correct" value="${answer.correct}">
-                            <span>${answer.description}</span>
+                    <div class="answer">
+                        <input id= "${answer.answerId}" type="radio" class="hidden" name="correct" value="${answer.correct}">
+                        <label for="${answer.answerId}">
+                            ${answer.description}
                         </label>
                     </div>
                     <br>
