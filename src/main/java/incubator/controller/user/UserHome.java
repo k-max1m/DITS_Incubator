@@ -1,33 +1,24 @@
 package incubator.controller.user;
 
-import incubator.entity.Topic;
-import incubator.service.TestServiceImpl;
-import incubator.service.TopicServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.List;
+import java.security.Principal;
 
 @Controller
+@RequestMapping("/user")
 public class UserHome {
-    @Autowired
-    private TopicServiceImpl topicService;
 
-    @Autowired
-    private TestServiceImpl testService;
-
-    @GetMapping("/chooseTopic")
-    public String chooseTest(ModelMap map) {
-        List<Topic> topics = topicService.getAllTopic();
-        map.put("topics", topics);
-        map.put("tests", testService.getTestsByTopic(topics.get(0)));
+    @GetMapping("/chooseTest")
+    public String chooseTest(Principal principal, Model model) {
+        model.addAttribute("userName",principal.getName());
         return "user/chooseTest";
     }
 
-    @GetMapping("/personalStatistic")
+    @GetMapping("/statistic")
     public String personalStatistic() {
-        return "redirect:/userStatistic";
+        return "user/personalStatistic";
     }
 }

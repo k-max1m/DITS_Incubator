@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
+@Transactional
 @Service
 @Transactional
 public class AnswerServiceImpl implements AnswerService {
@@ -35,5 +35,10 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public Answer getByDescription(String description) {
         return answerRepos.findByDescription(description);
+    }
+
+    @Override
+    public void save(Answer answer) {
+        answerRepos.save(answer);
     }
 }

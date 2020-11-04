@@ -1,38 +1,29 @@
 package incubator.service;
 
 import incubator.entity.Test;
-import incubator.entity.Topic;
 import incubator.repository.TestRepos;
-import incubator.repository.TopicRepos;
+import incubator.service.interfaces.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
-
-@Service
 @Transactional
-public class TestServiceImpl {
+@Service
+public class TestServiceImpl implements TestService {
     @Autowired
     private TestRepos testRepos;
-
-    @Autowired
-    private TopicRepos topicRepos;
-
+    @Override
     public Test getById(int id){return testRepos.findById(id).get();}
 
-    public List<Test> getTestsByTopic(Topic topic) {
-        return testRepos.findByTopic(topic);
+    @Override
+    public void save(Test test) {
+        testRepos.save(test);
     }
 
-    public List<String> getNamesTestsByTopic(String topic) {
-        Topic topicToTests = topicRepos.findByName(topic);
-        List<String> testsNames = testRepos.findByTopic(topicToTests).stream().map(Test::getName).collect(Collectors.toList());
-        return testsNames;
+    @Override
+    public List<Test> getAll() {
+        return testRepos.findAllByTestIdNotNull();
     }
 
-    public Test getTestByName(String name) {
-        return testRepos.findByName(name);
-    }
 }

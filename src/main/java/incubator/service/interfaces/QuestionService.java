@@ -13,4 +13,6 @@ public interface QuestionService {
     Question getByQuestionId(int id);
 
     Question getByDescription(String description);
+
+    void save(Question question);
 }
