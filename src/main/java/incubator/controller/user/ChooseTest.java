@@ -1,6 +1,8 @@
 package incubator.controller.user;
 
+
 import incubator.service.TestServiceImpl;
+import incubator.service.interfaces.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -10,10 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
+
 @Controller
 public class ChooseTest {
     @Autowired
-    private TestServiceImpl testService;
+    private TestService testService;
 
     @GetMapping("/chooseTest")
     @ResponseBody

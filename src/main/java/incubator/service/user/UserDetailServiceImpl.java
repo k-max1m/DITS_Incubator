@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class UserDetailServiceImpl implements UserDetailsService {
     private UserRepos userRepos;
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private RoleRepos roleRepos;
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
@@ -60,16 +64,11 @@ public class UserDetailServiceImpl implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getLogin(),user.getPassword(),grantedAuthorities);
     }
 
-    public User findUserById(int id){return userRepos.findById(id).get();}
-
-    public List<User> allUsers(){return userRepos.findAll();}
-
     public boolean save(User user){
         User aUser = userRepos.findByLogin(user.getLogin());
         if(aUser != null){
             return false;
         }
-        user.setRole(new Role((char)0,(char)1,(char)0));
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepos.save(user);
         return true;

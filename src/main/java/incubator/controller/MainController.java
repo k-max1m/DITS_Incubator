@@ -1,13 +1,20 @@
 package incubator.controller;
 
-import incubator.service.user.GrantedAuthorityImpl;
+import incubator.entity.User;
+import incubator.repository.UserRepos;
+import incubator.service.interfaces.RoleService;
+import incubator.service.user.UserDetailServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.Collection;
 import java.util.List;
@@ -16,6 +23,13 @@ import java.util.stream.Collectors;
 
 @Controller
 public class MainController {
+    @Autowired
+    UserRepos userRepos;
+    @Autowired
+    RoleService roleService;
+    @Autowired
+    UserDetailServiceImpl userDetailService;
+
     @GetMapping("/login")
     public String login(ModelMap model) {
         return "login";
@@ -47,6 +61,29 @@ public class MainController {
     @GetMapping("/")
     public String mainPage() {
         return "login";
+    }
+
+    @GetMapping("/registration")
+    public String registration(Model model){
+        model.addAttribute("userForm", new User());
+        return "registration";
+    }
+
+    @PostMapping("/registration")
+    public String getRegistration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model){
+        userForm.setRole(roleService.getRoleById(3));
+        userDetailService.save(userForm);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("usernameError", bindingResult.getAllErrors().toString());
+            return "registration";
+        }
+        if (!userDetailService.save(userForm)){
+            model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
+            return "registration";
+        }
+        model.addAttribute("usernameError", "all will be ok!");
+        return "registration";
+
     }
 
 }

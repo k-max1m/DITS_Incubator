@@ -13,4 +13,6 @@ public interface AnswerService {
     Answer getByAnswerId(int id);
 
     Answer getByDescription(String description);
+
+    void save(Answer answer);
 }

@@ -9,9 +9,11 @@ import java.util.List;
 
 @Repository
 public interface TestRepos extends JpaRepository<Test, Integer> {
+    List<Test> findAllByTestIdNotNull();
     List<Test> findByTopic(Topic topic);
-
     Test findByTestId(int id);
-
     Test findByName(String name);
+    List<Test> getAllByName(String name);
+    List<Test> getAllByTopic(Topic topic);
+
 }

@@ -2,6 +2,8 @@ package incubator.service;
 
 import incubator.entity.Topic;
 import incubator.repository.TopicRepos;
+
+import incubator.service.interfaces.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,9 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @Service
 @Transactional
-public class TopicServiceImpl {
+public class TopicServiceImpl implements TopicService {
     @Autowired
     private TopicRepos topicRepos;
 
@@ -19,5 +22,10 @@ public class TopicServiceImpl {
 
     public List<Topic> getAllTopic() {
         return topicRepos.findAll();
+    }
+
+    @Override
+    public void save(Topic topic) {
+        topicRepos.save(topic);
     }
 }

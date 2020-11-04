@@ -4,6 +4,7 @@ import incubator.entity.Test;
 import incubator.entity.Topic;
 import incubator.repository.TestRepos;
 import incubator.repository.TopicRepos;
+import incubator.service.interfaces.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class TestServiceImpl {
+public class TestServiceImpl implements TestService {
     @Autowired
     private TestRepos testRepos;
 
@@ -35,4 +36,16 @@ public class TestServiceImpl {
     public Test getTestByName(String name) {
         return testRepos.findByName(name);
     }
+
+
+    @Override
+    public void save(Test test) {
+        testRepos.save(test);
+    }
+
+    @Override
+    public List<Test> getAll() {
+        return testRepos.findAllByTestIdNotNull();
+    }
+
 }

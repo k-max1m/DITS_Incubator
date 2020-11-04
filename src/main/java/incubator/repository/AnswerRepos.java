@@ -16,4 +16,5 @@ public interface AnswerRepos extends JpaRepository<Answer, Integer> {
     List<Answer> findByQuestion(Question question);
 
     Answer findByDescription(String description);
+
 }

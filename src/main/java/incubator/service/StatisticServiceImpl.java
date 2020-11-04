@@ -73,4 +73,24 @@ public class StatisticServiceImpl implements StatisticService {
 
         return resultList;
     }
+
+
+    @Override
+    public List<Statistic> getByUser(User user){return statisticRepos.getAllByUser(user);}
+
+    @Override
+    public List<Statistic> getByQuestionAndUser(Question question, User user) {
+        return statisticRepos.getAllByQuestionAndUser(question, user);
+    }
+
+    @Override
+    public List<Statistic> getByQuestion(Question question) {
+        return statisticRepos.getAllByQuestion(question);
+    }
+
+    @Override
+    public void save(Statistic statistic) {
+        statisticRepos.save(statistic);
+    }
+
 }

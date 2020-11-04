@@ -36,4 +36,9 @@ public class QuestionServiceImpl implements QuestionService {
     public Question getByDescription(String description) {
         return questionRepos.findByDescription(description);
     }
+
+    @Override
+    public void save(Question question) {
+        questionRepos.save(question);
+    }
 }

@@ -14,4 +14,7 @@ public interface LinkRepos extends JpaRepository<Link, Integer> {
     Link findLinkByLinkId(int id);
 
     Link findLinkByLink(String link);
+
+    List<Link> findLinkByLiterature(Literature literature);
+
 }

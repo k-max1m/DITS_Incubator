@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
 @Service
 @Transactional
 public class LiteratureServiceImpl implements LiteratureService {
@@ -35,5 +34,10 @@ public class LiteratureServiceImpl implements LiteratureService {
     @Override
     public Literature getByDescription(String description) {
         return literatureRepos.findByDescription(description);
+    }
+
+    @Override
+    public void save(Literature literature) {
+        literatureRepos.save(literature);
     }
 }
