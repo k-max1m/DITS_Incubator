@@ -34,7 +34,7 @@
         <form:form action="/admin/setQuestion/${qId}/setTest/" method="POST">
             <select class="input-style" name="testId" placeholder="testId">
                 <% for(Test test: tests){ %>
-                <option value=<%= test.getTestId() %>><%= test.getName() %></option>
+                <option value=<%= test.getTestId() %> <% if(test.getTestId() == question.getTest().getTestId()) { %> selected <% }%> ><%= test.getName() %></option>
                 <% } %>
             </select><br>
             <input name="submit" type="submit" class="myButton" value="submit"/>
