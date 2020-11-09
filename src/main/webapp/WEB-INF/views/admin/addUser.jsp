@@ -23,7 +23,7 @@
                 <option value="1">Tutor</option>
                 <option value="3">User</option>
             </select>
-            <input name="submit" type="submit" class="myButton" value="submit"/>
+            <input name="submit" type="submit" class="myButton" value="add user"/>
         </form:form>
             </div>
             <div class="toMain">

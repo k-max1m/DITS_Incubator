@@ -23,7 +23,7 @@
                             <option value=<%= test.getTestId() %>><%= test.getName() %></option>
                             <% } %>
                         </select><br>
-                        <input name="submit" type="submit" class="myButton" value="submit"/>
+                        <input name="submit" type="submit" class="myButton" value="add question"/>
                     </form:form>
             </div>
             <div class="toMain">

@@ -21,13 +21,12 @@ public class SetQuestion {
     @GetMapping("/")
     private String choose(Model model){
         model.addAttribute("questions",questionService.getAllQuestion());
-        model.addAttribute("tests",questionService.getAllQuestion());
         return "admin/setQuestion";
     }
     @GetMapping("/{qId}")
     public String setQuestion(@PathVariable int qId, Model model){
         model.addAttribute("question", questionService.getByQuestionId(qId));
-        model.addAttribute("tests",questionService.getAllQuestion());
+        model.addAttribute("tests",testService.getAll());
         return("admin/setQuestion");
     }
     @PostMapping("/{qId}/setDescription/")
@@ -37,7 +36,7 @@ public class SetQuestion {
         question.setDescription(description);
         questionService.updateDescription(question);
         model.addAttribute("question", questionService.getByQuestionId(qId));
-        model.addAttribute("tests",questionService.getAllQuestion());
+        model.addAttribute("tests", testService.getAll());
         model.addAttribute("result","question set successfully");
         return("admin/setQuestion");
     }
@@ -48,7 +47,7 @@ public class SetQuestion {
         question.setTest(testService.getById(testId));
         questionService.updateTest(question);
         model.addAttribute("question", questionService.getByQuestionId(qId));
-        model.addAttribute("tests",questionService.getAllQuestion());
+        model.addAttribute("tests",testService.getAll());
         model.addAttribute("result","question set successfully");
         return("admin/setQuestion");
     }

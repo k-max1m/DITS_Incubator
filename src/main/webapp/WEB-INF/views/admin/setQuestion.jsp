@@ -27,8 +27,8 @@
         <%}%>
         <div class="loginForm">
         <form:form action="/admin/setQuestion/${qId}/setDescription/" method="POST">
-            <input type="text" class="input-style" name="description" placeholder="description"/>
-            <input name="submit" type="submit" class="myButton" value="submit"/>
+            <input type="text" class="input-style" name="description" placeholder="description" value=<%=question.getDescription()%>/>
+            <input name="submit" type="submit" class="myButton" value="change description"/>
         </form:form>
             <% List<Test> tests = (List<Test>) request.getAttribute("tests");%>
         <form:form action="/admin/setQuestion/${qId}/setTest/" method="POST">
@@ -37,10 +37,10 @@
                 <option value=<%= test.getTestId() %> <% if(test.getTestId() == question.getTest().getTestId()) { %> selected <% }%> ><%= test.getName() %></option>
                 <% } %>
             </select><br>
-            <input name="submit" type="submit" class="myButton" value="submit"/>
+            <input name="submit" type="submit" class="myButton" value="change test"/>
         </form:form>
             <form:form action="/admin/setQuestion/${qId}/deleteQuestion/" method="POST">
-                <input name="submit" type="submit" class="myButton" value="submit"/>
+                <input name="submit" type="submit" class="myButton" value="delete"/>
             </form:form>
         </div>
     <% } %>

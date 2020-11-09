@@ -24,7 +24,7 @@
                 <option value=<%= question.getQuestionId() %>> <%= question.getDescription()%></option>
                 <% } %>
             </select><br>
-            <input name="submit" type="submit" class="myButton" value="submit"/>
+            <input name="submit" type="submit" class="myButton" value="add literature"/>
         </form:form>
     </div>
     <div class="toMain">
