@@ -1,31 +1,11 @@
 package incubator.entity;
 
-import org.springframework.data.jpa.repository.Modifying;
-
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "answer")
 public class Answer implements Serializable {
-
-    @Transient
-    private int questionId;
-
-    public int getQuestionId() {
-        return questionId;
-    }
-
-    public Answer(int questionId, String description, boolean correct) {
-        this.questionId = questionId;
-        this.description = description;
-        this.correct = correct;
-    }
-
-    public void setQuestionId(int questionId) {
-        this.questionId = questionId;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int answerId;
@@ -35,6 +15,10 @@ public class Answer implements Serializable {
     @ManyToOne
     @JoinColumn(name = "questionId")
     private Question question;
+
+
+    @Transient
+    private int questionId;
 
     public Answer() {
     }
@@ -48,6 +32,20 @@ public class Answer implements Serializable {
         this.correct = correct;
         this.description = description;
         this.question = question;
+    }
+
+    public int getQuestionId() {
+        return questionId;
+    }
+
+    public Answer(int questionId, String description, boolean correct) {
+        this.questionId = questionId;
+        this.description = description;
+        this.correct = correct;
+    }
+
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
     }
 
     public int getAnswerId() {

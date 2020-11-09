@@ -18,24 +18,7 @@ public class Role implements Serializable {
         this.user = user;
         this.admin = admin;
     }
-    public Role(String str) {
-        if(str.equals("1")){
-            this.tutor = '1';
-            this.user = '0';
-            this.admin = '0';
-        }
-        else if(str.equals("2")){
-            this.tutor = '0';
-            this.user = '0';
-            this.admin = '1';
-        }
-        else if(str.equals("1")){
-            this.tutor = '0';
-            this.user = '1';
-            this.admin = '0';
-        }
 
-    }
     public Role() {
     }
 

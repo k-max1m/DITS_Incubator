@@ -12,8 +12,16 @@ public class Test implements Serializable {
     private String name;
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "topicId")
+    private Topic topic;
+
     @Transient
     private int topicId;
+
+    public Test() {
+    }
+
 
     public int getTopicId() {
         return topicId;
@@ -27,13 +35,6 @@ public class Test implements Serializable {
         this.name = name;
         this.description = description;
         this.topicId = topicId;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "topicId")
-    private Topic topic;
-
-    public Test() {
     }
 
     public Test(String name, String description, Topic topic) {
