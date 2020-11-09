@@ -16,14 +16,6 @@ public class User implements Serializable {
     private String login;
     private String password;
 
-    public int getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
-    }
-
     @Transient
     private int roleId;
 
@@ -106,6 +98,14 @@ public class User implements Serializable {
         this.lastName = lastName;
         this.login = login;
         this.password = password;
+        this.roleId = roleId;
+    }
+
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
         this.roleId = roleId;
     }
 }

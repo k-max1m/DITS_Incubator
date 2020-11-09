@@ -11,6 +11,10 @@ public class Link implements Serializable {
     private int linkId;
     private String link;
 
+    @ManyToOne
+    @JoinColumn(name = "literatureId")
+    private Literature literature;
+
     @Transient
     private int literatureId;
 
@@ -26,10 +30,6 @@ public class Link implements Serializable {
     public void setLiteratureId(int literatureId) {
         this.literatureId = literatureId;
     }
-
-    @ManyToOne
-    @JoinColumn(name = "literatureId")
-    private Literature literature;
 
     public Link() {
     }
