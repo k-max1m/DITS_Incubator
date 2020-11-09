@@ -18,26 +18,45 @@ public class SetQuestion {
     @Autowired
     QuestionService questionService;
 
+    @GetMapping("/")
+    private String choose(Model model){
+        model.addAttribute("questions",questionService.getAllQuestion());
+        model.addAttribute("tests",questionService.getAllQuestion());
+        return "admin/setQuestion";
+    }
     @GetMapping("/{qId}")
     public String setQuestion(@PathVariable int qId, Model model){
         model.addAttribute("question", questionService.getByQuestionId(qId));
+        model.addAttribute("tests",questionService.getAllQuestion());
         return("admin/setQuestion");
     }
-    @PostMapping("/{qId}/setDescription")
-    public String setDescription(@RequestParam String description,  Model model,
+    @PostMapping("/{qId}/setDescription/")
+    public String setDescription(@ModelAttribute String description,  Model model,
                               @PathVariable int qId){
         Question question = questionService.getByQuestionId(qId);
         question.setDescription(description);
-        model.addAttribute("result","question added successfully");
+        questionService.updateDescription(question);
+        model.addAttribute("question", questionService.getByQuestionId(qId));
+        model.addAttribute("tests",questionService.getAllQuestion());
+        model.addAttribute("result","question set successfully");
         return("admin/setQuestion");
     }
-    @PostMapping("/{qId}/setDescription")
-    public String addQuestion(@RequestParam int testId, Model model,
+   @PostMapping("/{qId}/setTest/")
+    public String SetTest(@RequestParam int testId, Model model,
                               @PathVariable int qId){
         Question question = questionService.getByQuestionId(qId);
         question.setTest(testService.getById(testId));
-        model.addAttribute("result","question added successfully");
+        questionService.updateTest(question);
+        model.addAttribute("question", questionService.getByQuestionId(qId));
+        model.addAttribute("tests",questionService.getAllQuestion());
+        model.addAttribute("result","question set successfully");
         return("admin/setQuestion");
+    }
+    @PostMapping("/{qId}/deleteQuestion/")
+    public String deleteTest(Model model, @PathVariable int qId){
+        questionService.deleteQuestion(questionService.getByQuestionId(qId));
+        model.addAttribute("result","question deleted successfully");
+        return "redirect:/admin/home";
     }
 }
 
