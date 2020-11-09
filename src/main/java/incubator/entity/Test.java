@@ -12,6 +12,23 @@ public class Test implements Serializable {
     private String name;
     private String description;
 
+    @Transient
+    private int topicId;
+
+    public int getTopicId() {
+        return topicId;
+    }
+
+    public void setTopicId(int topicId) {
+        this.topicId = topicId;
+    }
+
+    public Test(String name, String description, int topicId) {
+        this.name = name;
+        this.description = description;
+        this.topicId = topicId;
+    }
+
     @ManyToOne
     @JoinColumn(name = "topicId")
     private Topic topic;

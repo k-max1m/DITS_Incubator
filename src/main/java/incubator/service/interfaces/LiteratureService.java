@@ -12,6 +12,13 @@ public interface LiteratureService {
 
     Literature getByLiteratureId(int id);
 
-   Literature getByDescription(String description);
-   void save(Literature literature);
+    Literature getByDescription(String description);
+
+    void save(Literature literature);
+
+    void updateDescription(Literature literature);
+
+    void updateQuestion(Literature literature);
+
+    void deleteLiterature(Literature literature);
 }

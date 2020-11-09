@@ -1,7 +1,6 @@
-package incubator.service.user;
+package incubator.service.serviceForSecurity;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 

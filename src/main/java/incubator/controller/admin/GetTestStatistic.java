@@ -26,6 +26,11 @@ public class GetTestStatistic {
     @Autowired
     TestService testService;
 
+    @GetMapping("/")
+    public String testList(Model model){
+        model.addAttribute("tests", testService.getAll());
+        return "admin/testStatistic";
+    }
     @GetMapping("/{tId}")
     public String getTestStatistic(@PathVariable int tId, Model model){
         HashMap<Question, List<Statistic>> statistic = new HashMap<>();
@@ -35,6 +40,6 @@ public class GetTestStatistic {
 
         }
         model.addAttribute("statistic", statistic);
-        return "admin/TestStatistic";
+        return "admin/testStatistic";
     }
 }

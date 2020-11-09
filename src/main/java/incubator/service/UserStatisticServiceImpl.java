@@ -17,11 +17,15 @@ import java.util.stream.Collectors;
 @Service
 @Transactional
 public class UserStatisticServiceImpl implements UserStatisticService {
-    @Autowired
     private UserStatisticRepo userStatisticRepo;
 
-    @Autowired
     private UserRepos userRepos;
+
+    @Autowired
+    public UserStatisticServiceImpl(UserStatisticRepo userStatisticRepo, UserRepos userRepos) {
+        this.userStatisticRepo = userStatisticRepo;
+        this.userRepos = userRepos;
+    }
 
     @Override
     public List<UserStatistic> getUserStatistic() {

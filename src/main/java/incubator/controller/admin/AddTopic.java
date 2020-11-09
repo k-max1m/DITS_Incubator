@@ -17,6 +17,7 @@ public class AddTopic {
     public String addTopic(){
         return "admin/addTopic";
     }
+
     @PostMapping("/")
     public String addTopic(@ModelAttribute("topicForm") Topic topicForm, Model model){
         topicService.save(topicForm);

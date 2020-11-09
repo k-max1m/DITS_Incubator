@@ -18,13 +18,14 @@ public class AddQuestion {
     QuestionService questionService;
 
     @GetMapping("/")
-    public String addQuestion(){
+    public String addQuestion(Model model){
+        model.addAttribute("tests", testService.getAll());
+        return("admin/addQuestion"); }
 
-        return("admin/addQuestion");
-    }
     @PostMapping("/")
     public String addQuestion(@ModelAttribute("questionForm") Question questionForm,
                               Model model){
+        questionForm.setTest(testService.getById(questionForm.getTestId()));
         questionService.save(questionForm);
         model.addAttribute("result","question added successfully");
         return("admin/addQuestion");

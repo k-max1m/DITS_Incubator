@@ -1,4 +1,4 @@
-package incubator.service.user;
+package incubator.service.serviceForSecurity;
 
 import incubator.entity.Role;
 import incubator.entity.User;
@@ -11,14 +11,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
 
 @Service
 public class UserDetailServiceImpl implements UserDetailsService {

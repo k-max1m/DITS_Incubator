@@ -9,13 +9,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-@Transactional
 @Service
 @Transactional
 public class LiteratureServiceImpl implements LiteratureService {
+    private LiteratureRepos literatureRepos;
 
     @Autowired
-    private LiteratureRepos literatureRepos;
+    public LiteratureServiceImpl(LiteratureRepos literatureRepos) {
+        this.literatureRepos = literatureRepos;
+    }
 
     @Override
     public List<Literature> getAllLiterature() {
@@ -40,5 +42,20 @@ public class LiteratureServiceImpl implements LiteratureService {
     @Override
     public void save(Literature literature) {
         literatureRepos.save(literature);
+    }
+
+    @Override
+    public void updateDescription(Literature literature){
+        literatureRepos.updateDescription(literature.getDescription(), literature.getLiteratureId());
+    }
+
+    @Override
+    public void updateQuestion(Literature literature){
+        literatureRepos.updateQuestion(literature.getQuestion(), literature.getLiteratureId());
+    }
+
+    @Override
+    public void deleteLiterature(Literature literature){
+        literatureRepos.delete(literature);
     }
 }

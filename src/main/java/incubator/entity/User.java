@@ -1,11 +1,12 @@
 package incubator.entity;
+
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name="user")
 public class User implements Serializable {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +16,16 @@ public class User implements Serializable {
     private String login;
     private String password;
 
+    public int getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
+    }
+
+    @Transient
+    private int roleId;
 
     @ManyToOne
     @JoinColumn(name="roleId")
@@ -82,15 +93,6 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public void setRole(int roleId) {
-        if(roleId == 1) this.getRole().setAdmin('1');
-        else this.getRole().setAdmin('0');
-        if(roleId == 2) this.getRole().setTutor('1');
-        else this.getRole().setTutor('0');
-        if(roleId == 3) this.getRole().setUser('1');
-        else this.getRole().setUser('0');
-    }
-
     public User(String firstName, String lastName, String login, String password, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -98,11 +100,12 @@ public class User implements Serializable {
         this.password = password;
         this.role = role;
     }
+
     public User(String firstName, String lastName, String login, String password, int roleId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.login = login;
         this.password = password;
-        this.setRole(roleId);
+        this.roleId = roleId;
     }
 }

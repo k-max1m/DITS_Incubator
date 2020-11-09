@@ -9,13 +9,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-@Transactional
+
 @Service
 @Transactional
 public class QuestionServiceImpl implements QuestionService {
 
-    @Autowired
     private QuestionRepos questionRepos;
+
+    @Autowired
+    public QuestionServiceImpl(QuestionRepos questionRepos) {
+        this.questionRepos = questionRepos;
+    }
 
     @Override
     public List<Question> getAllQuestion() {
@@ -40,5 +44,19 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void save(Question question) {
         questionRepos.save(question);
+    }
+
+    @Override
+    public void updateDescription(Question question){
+        questionRepos.updateDescription(question.getDescription(), question.getTestId());
+    }
+    @Override
+    public void updateTest(Question question){
+        questionRepos.updateTest(question.getTest(), question.getTestId());
+    }
+
+    @Override
+    public void deleteQuestion(Question question){
+        questionRepos.delete(question);
     }
 }

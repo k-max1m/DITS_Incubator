@@ -8,6 +8,21 @@ import java.util.Objects;
 @Table(name = "question")
 public class Question implements Serializable {
 
+    public Question(int testId, String description) {
+        this.testId = testId;
+        this.description = description;
+    }
+
+    public int getTestId() {
+        return testId;
+    }
+
+    public void setTestId(int testId) {
+        this.testId = testId;
+    }
+
+    @Transient
+    private int testId;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int questionId;
