@@ -5,12 +5,12 @@ import incubator.entity.Literature;
 import incubator.service.interfaces.LiteratureService;
 import incubator.service.interfaces.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+@Controller
+@RequestMapping("/admin/setLiterature")
 public class SetLiterature {
     @Autowired
     LiteratureService literatureService;

@@ -22,7 +22,7 @@ public class AddLiterature {
 
     @GetMapping("/")
     public String addLink(Model model){
-        model.addAttribute("literatures",literatureService.getAllLiterature());
+        model.addAttribute("questions",questionService.getAllQuestion());
         return("admin/addLiterature"); }
 
     @PostMapping("/")

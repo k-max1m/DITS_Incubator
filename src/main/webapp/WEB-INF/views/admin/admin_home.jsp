@@ -28,10 +28,10 @@
                 <div class="marginBottom"><a class="link" href="/admin/setLink/">Set Link</a></div><br>
                 <div class="marginBottom"><a class="link" href="/admin/addTopic/">Add Topic</a></div><br>
                 <div class="marginBottom"><a class="link" href="/admin/setTopic/">Set Topic</a></div><br>
-                <div class="marginBottom"><a class="link" href="/admin/testStatistic/">Get Test statistic</a></div><br>
-                <div class="marginBottom"><a class="link" href="/admin/userStatistic/">Get User statistic</a></div><br>
                 <div class="marginBottom"><a class="link" href="/admin/addLiterature/">Add Literature</a></div><br>
                 <div class="marginBottom"><a class="link" href="/admin/setLiterature/">Set Literature</a></div><br>
+                <div class="marginBottom"><a class="link" href="/admin/testStatistic/">Get Test statistic</a></div><br>
+                <div class="marginBottom"><a class="link" href="/admin/userStatistic/">Get User statistic</a></div><br>
             </div>
             <div class="exit">
                 <a class="link" href="/logout">Выйти</a>

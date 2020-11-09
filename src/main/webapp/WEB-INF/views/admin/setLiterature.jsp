@@ -13,7 +13,7 @@
 </head>
 <body>
 <div class="myCount">
-    <% if(request.getAttribute("links") != null) { %>
+    <% if(request.getAttribute("literatures") != null) { %>
     <h1>Choose Literature</h1>
     <% List<Literature> literatures = (List<Literature>) request.getAttribute("literatures");%>
     <%for(Literature literature: literatures){%>
@@ -33,9 +33,9 @@
         </form:form>
         <% List<Question> questions = (List<Question>) request.getAttribute("questions"); %>
         <form:form action="/admin/setLiterature/${lId}/setQuestion/" method="POST">
-            <select class="input-style" name="literatureId" placeholder="literatureId">
+            <select class="input-style" name="questionId" placeholder="questionId">
                 <% for(Question question: questions) { %>
-                <option value=<%= question.getQuestionId() %>> <%= question.getDescription() %></option>
+                <option value=<%= question.getQuestionId() %>> <% if(question.getQuestionId() == literature.getQuestion().getQuestionId()) { %> selected <% }%> <%= question.getDescription() %></option>
                 <% } %>
             </select><br>
             <input name="submit" type="submit" class="myButton" value="submit"/>

@@ -25,24 +25,24 @@ else {%>
 <%= request.getAttribute("result")%>
 <%}%>
     <div class="loginForm">
-    <form:form action="/admin/setQuest/${tId}/setName/" method="POST">
+    <form:form action="/admin/setTest/${tId}/setName/" method="POST">
     <input type="text" class="input-style" name="name" placeholder="name"/>
     <input name="submit"  type="submit" class="myButton" value="submit"/>
 </form:form>
-<form:form action="/admin/setQuest/${tId}/setDescription/" method="POST">
+<form:form action="/admin/setTest/${tId}/setDescription/" method="POST">
     <input type="text" class="input-style" name="description" placeholder="description"/>
     <input name="submit" type="submit" class="myButton" value="submit"/>
 </form:form>
         <% List<Topic> topics = (List<Topic>) request.getAttribute("topics"); %>
-<form:form action="/admin/setQuest/${tId}/setTopic/" method="POST">
+<form:form action="/admin/setTest/${tId}/setTopic/" method="POST">
     <select class="input-style" name="description" placeholder="description">
         <% for(Topic topic: topics){ %>
-        <option value=<%=topic.getTopicId()%>> <%= topic.getName() %></option>
+        <option value=<%=topic.getTopicId()%> <% if(topic.getTopicId() == test.getTopic().getTopicId()) { %> selected <% }%> >> <%= topic.getName() %></option>
         <% } %>
     </select>
     <input name="submit" type="submit" class="myButton" value="submit"/>
 </form:form>
-        <form:form action="/admin/setQuest/${tId}/deleteTest/" method="POST">
+        <form:form action="/admin/setTest/${tId}/deleteTest/" method="POST">
             <input name="submit" type="submit" class="myButton" value="submit"/>
         </form:form>
     </div>

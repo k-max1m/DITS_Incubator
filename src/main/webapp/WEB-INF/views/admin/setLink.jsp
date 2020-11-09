@@ -28,14 +28,14 @@
     <%}%>
     <div class="loginForm">
         <form:form action="/admin/setLink/${lId}/setLink/" method="POST">
-            <input type="text" class="input-style" name="link" placeholder="link"/>
+            <input type="text" class="input-style" name="link" placeholder="link" value=<%= link.getLink()%>/>
             <input name="submit" type="submit" class="myButton" value="submit"/>
         </form:form>
         <% List<Literature> literatures = (List<Literature>) request.getAttribute("literatures"); %>
         <form:form action="/admin/setLink/${lId}/setLiterarture/" method="POST">
             <select class="input-style" name="literatureId" placeholder="literatureId">
                 <% for(Literature literature: literatures) { %>
-                <option value=<%= literature.getLiteratureId() %>> <%= literature.getDescription() %></option>
+                <option value=<%= literature.getLiteratureId() %> <% if(literature.getLiteratureId() == link.getLiterature().getLiteratureId()) { %> selected <% }%>> <%= literature.getDescription() %></option>
                 <% } %>
             </select><br>
             <input name="submit" type="submit" class="myButton" value="submit"/>
