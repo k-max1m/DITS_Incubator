@@ -11,11 +11,16 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface StatisticRepos extends JpaRepository<Statistic,Integer> {
+public interface StatisticRepos extends JpaRepository<Statistic, Integer> {
     Statistic getByStatisticId(int id);
+
     List<Statistic> getAllByCorrect(boolean correct);
+
     List<Statistic> getAllByDate(Date date);
+
     List<Statistic> getAllByUser(User user);
+
     List<Statistic> getAllByQuestion(Question question);
+
     List<Statistic> getAllByQuestionAndUser(Question question, User user);
 }

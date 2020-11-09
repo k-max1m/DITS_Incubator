@@ -12,6 +12,35 @@ public class Statistic implements Serializable {
     private int statisticId;
     private Date date;
     private boolean correct;
+
+    @Transient
+    private int questionId;
+    @Transient
+    private int userId;
+
+    public Statistic(Date date, boolean correct, int questionId, int userId) {
+        this.date = date;
+        this.correct = correct;
+        this.questionId = questionId;
+        this.userId = userId;
+    }
+
+    public int getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     @ManyToOne
     @JoinColumn(name="questionId")
     private Question question;
@@ -20,6 +49,13 @@ public class Statistic implements Serializable {
     private User user;
 
     public Statistic() {
+    }
+
+    public Statistic(Date date, boolean correct, Question question, User user) {
+        this.date = date;
+        this.correct = correct;
+        this.question = question;
+        this.user = user;
     }
 
     @Override
@@ -65,10 +101,11 @@ public class Statistic implements Serializable {
         this.user = user;
     }
 
-    public Statistic(Date date, boolean correct, Question question, User user) {
-        this.date = date;
-        this.correct = correct;
-        this.question = question;
-        this.user = user;
+    public int getStatisticId() {
+        return statisticId;
+    }
+
+    public void setStatisticId(int statisticId) {
+        this.statisticId = statisticId;
     }
 }

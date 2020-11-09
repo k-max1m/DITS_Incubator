@@ -35,9 +35,12 @@
             </c:forEach>
         </table>
     </div>
-    <form action="/homeUser">
+    <form action="/user/home">
         <input class="myButton" type="submit" value="Home page">
     </form>
+    <div class="exit">
+        <a class="link" href="/logout">Выйти</a>
+    </div>
 </div>
 </body>
 </html>

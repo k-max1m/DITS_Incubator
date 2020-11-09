@@ -15,4 +15,10 @@ public interface QuestionService {
     Question getByDescription(String description);
 
     void save(Question question);
+
+    void updateDescription(Question question);
+
+    void updateTest(Question question);
+
+    void deleteQuestion(Question question);
 }

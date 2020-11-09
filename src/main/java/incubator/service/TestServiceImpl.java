@@ -1,20 +1,46 @@
 package incubator.service;
 
 import incubator.entity.Test;
+import incubator.entity.Topic;
 import incubator.repository.TestRepos;
+import incubator.repository.TopicRepos;
 import incubator.service.interfaces.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-@Transactional
+import java.util.stream.Collectors;
+
 @Service
+@Transactional
 public class TestServiceImpl implements TestService {
-    @Autowired
     private TestRepos testRepos;
-    @Override
+
+    private TopicRepos topicRepos;
+
+    @Autowired
+    public TestServiceImpl(TestRepos testRepos, TopicRepos topicRepos) {
+        this.testRepos = testRepos;
+        this.topicRepos = topicRepos;
+    }
+
     public Test getById(int id){return testRepos.findById(id).get();}
+
+    public List<Test> getTestsByTopic(Topic topic) {
+        return testRepos.findByTopic(topic);
+    }
+
+    public List<String> getNamesTestsByTopic(String topic) {
+        Topic topicToTests = topicRepos.findByName(topic);
+        List<String> testsNames = testRepos.findByTopic(topicToTests).stream().map(Test::getName).collect(Collectors.toList());
+        return testsNames;
+    }
+
+    public Test getTestByName(String name) {
+        return testRepos.findByName(name);
+    }
+
 
     @Override
     public void save(Test test) {
@@ -26,4 +52,23 @@ public class TestServiceImpl implements TestService {
         return testRepos.findAllByTestIdNotNull();
     }
 
+    @Override
+    public void updateName(Test test){
+        testRepos.updateName(test.getName(),test.getTopicId());
+    }
+
+    @Override
+    public void updateDescription(Test test){
+        testRepos.updateDescription(test.getDescription(),test.getTopicId());
+    }
+
+    @Override
+    public void updateTopic(Test test){
+        testRepos.updateTopic(test.getTopic(),test.getTopicId());
+    }
+
+    @Override
+    public void deleteTest(Test test){
+        testRepos.delete(test);
+    }
 }

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <html>
 <head>
@@ -14,15 +15,22 @@
 </head>
 <body>
 <security:form method="post" action="/registration" modelAttribute="userForm">
-    <h2>Registration</h2>
-    <%=request.getAttribute("usernameError")%>
-    <div>
-        <security:input type="text" path="firstName" name ="firstName" placeholder="firstName"></security:input>
-        <security:input type="text" path="lastName" name ="lastName" placeholder="lastName"></security:input>
-        <security:input type="text" path="login" name="login" placeholder="login"></security:input>
-        <security:input type="password" path="password" name="password" placeholder="password"></security:input>
+    <div class = "myCount">
+        <header><h1>Registration</h1></header>
+        <% if (request.getAttribute("usernameError") != null){ %>
+            <%= request.getAttribute("usernameError") %>
+        <% } %>
+        <div class="picture">
+            <img src="<c:url value="/resources/human1.png"/>" alt="human1.png">
+        </div>
+        <div class="loginForm">
+            <security:input type="text" class="input-style" path="firstName" name ="firstName" placeholder="firstName"></security:input>
+            <security:input type="text" class="input-style" path="lastName" name ="lastName" placeholder="lastName"></security:input>
+            <security:input type="text" class="input-style" path="login" name="login" placeholder="login"></security:input>
+            <security:input type="password" class="input-style" path="password" name="password" placeholder="password"></security:input>
+            <button type="submit" class="myButton">registration</button>
+        </div>
     </div>
-    <button type="submit">registration</button>
 </security:form>
 </body>
 </html>

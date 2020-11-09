@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `dits`.`user` (
     );
 
 CREATE TABLE IF NOT EXISTS `dits`.`statistic` (
-    `statisticId` INT NOT NULL unique AUTO_INCREMENT,
+    `statisticId` INT NOT NULL AUTO_INCREMENT,
     `date` date NULL,
     `correct`  boolean,
     `questionId` INT NOT NULL,
@@ -97,8 +97,10 @@ INSERT INTO `dits`.`role` (`roleId`, `tutor`, `user`, `admin`) VALUES ('1', '1',
 INSERT INTO `dits`.`role` (`roleId`, `tutor`, `user`, `admin`) VALUES ('2', '0', '0', '1');
 INSERT INTO `dits`.`role` (`roleId`, `tutor`, `user`, `admin`) VALUES ('3', '0', '1', '0');
 
-INSERT INTO `dits`.`user` (`firstName`, `lastName`, `login`, `password`, `roleId`) VALUES ('Jora', 'Jenkins', 'JJen','JlikeChe1', '1');
-INSERT INTO `dits`.`user` (`firstName`, `lastName`, `login`, `password`, `roleId`) VALUES ('Artem', 'Rudiy', 'ArRudiy','Pushka02', '2');
+INSERT INTO `dits`.`user` (`userId`, `firstName`, `lastName`, `login`, `password`, `roleId`) VALUES ('4', 'Pavel', 'Tylets', 'arhBear','$2a$10$aBqnFfpHvJlVWHqNhg5swu6ragkzvYAqcbcs4BaAKCXakJxBCDlju', '2');
+INSERT INTO `dits`.`user` (`userId`, `firstName`, `lastName`, `login`, `password`, `roleId`) VALUES ('3', 'Max', 'Kozlov', 'max','$2y$12$8V6Q41rmGsoSvZMWwsFtM.zJfpU2YvjHYADBv/Gm4movt8T2nkoa2', '3');
+INSERT INTO `dits`.`user` (`firstName`, `lastName`, `login`, `password`, `roleId`) VALUES ('Jora', 'Jenkins', 'JJen','$2a$10$WL8kKSx6RkGrXkjmS95yfOF5oWhtkobPRqeuKkn/sDge1GZZqyaRy', '1'); /* password: JLikeChe */
+INSERT INTO `dits`.`user` (`firstName`, `lastName`, `login`, `password`, `roleId`) VALUES ('Artem', 'Rudiy', 'ArRudiy','$2a$10$Bf.8hjHFOG8/tIJ10KpqU.CiZbqVh1x0QmG/Hy2M09fmkczuwBMD2', '2'); /* password: Pushka02 */
 
 INSERT INTO `dits`.`test` (`testId`, `name`, `description`, `topicId`) VALUES ('1', 'test1', 'description1', '1');
 INSERT INTO `dits`.`test` (`testId`, `name`, `description`, `topicId`) VALUES ('2', 'test2', 'description2', '1');
@@ -177,16 +179,25 @@ INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('7', 'link7
 INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('8', 'link8', '8');
 
 
-CREATE OR REPLACE VIEW `user_statistic` AS
- SELECT
-        `user`.`userId` AS `userId`,
-        COUNT(*) AS `allAnswers`,
-        SUM(`statistic`.`correct`) AS `correctAnswers`,
-        COUNT(`statistic`.`correct`) - SUM(`statistic`.`correct`) AS `incorrectAnswers`
+CREATE OR REPLACE VIEW `dits`.`user_statistic` AS
+    SELECT
+        `dits`.`statistic`.`statisticId` AS `id`,
+        `dits`.`user`.`userId` AS `userId`,
+        `dits`.`test`.`name` AS `testName`,
+        CONCAT_WS(' ',
+                `dits`.`user`.`firstName`,
+                `dits`.`user`.`lastName`) AS `firstAndLastName`,
+        `dits`.`question`.`description` AS `questionDescription`,
+        COUNT(0) AS `allAnswers`,
+        SUM(`dits`.`statistic`.`correct`) AS `correctAnswers`,
+        ROUND(((SUM(`dits`.`statistic`.`correct`) / COUNT(0)) * 100),
+                2) AS `percent`
     FROM
-        (`statistic`
-        JOIN `user` ON (`statistic`.`userId` = `user`.`userId`))
-    GROUP BY `statistic`.`userId`;
+        (((`dits`.`statistic`
+        JOIN `dits`.`user` ON ((`dits`.`statistic`.`userId` = `dits`.`user`.`userId`)))
+        JOIN `dits`.`question` ON ((`dits`.`question`.`questionId` = `dits`.`statistic`.`questionId`)))
+        JOIN `dits`.`test` ON ((`dits`.`question`.`testId` = `dits`.`test`.`testId`)))
+    GROUP BY `dits`.`user`.`userId` , `dits`.`statistic`.`questionId`;
     
     
 DROP PROCEDURE if exists test_stat;

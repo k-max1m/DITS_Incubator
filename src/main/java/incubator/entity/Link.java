@@ -11,6 +11,22 @@ public class Link implements Serializable {
     private int linkId;
     private String link;
 
+    @Transient
+    private int literatureId;
+
+    public Link(String link, int literatureId) {
+        this.link = link;
+        this.literatureId = literatureId;
+    }
+
+    public int getLiteratureId() {
+        return literatureId;
+    }
+
+    public void setLiteratureId(int literatureId) {
+        this.literatureId = literatureId;
+    }
+
     @ManyToOne
     @JoinColumn(name = "literatureId")
     private Literature literature;

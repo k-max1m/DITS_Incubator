@@ -1,10 +1,9 @@
 package incubator.configurations;
 
-import incubator.service.user.UserDetailServiceImpl;
+import incubator.service.serviceForSecurity.UserDetailServiceImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.ImportResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -27,6 +26,10 @@ import java.util.Properties;
 @EnableJpaRepositories("incubator.repository")
 @EnableTransactionManagement
 public class WebConfig implements WebMvcConfigurer {
+    private String url = "jdbc:mysql://localhost:3306/dits?serverTimezone=Europe/Moscow&useSSL=false";
+    private String driverClassName = "com.mysql.jdbc.Driver";
+    private String userName = "root";
+    private String password = "mrair2636";
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -44,10 +47,10 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://localhost:3306/dits?serverTimezone=Europe/Moscow&useSSL=false");
-        dataSource.setUsername("root");
-        dataSource.setPassword("mrair2636");
+        dataSource.setDriverClassName(driverClassName);
+        dataSource.setUrl(url);
+        dataSource.setUsername(userName);
+        dataSource.setPassword(password);
         return dataSource;
     }
 
@@ -64,7 +67,6 @@ public class WebConfig implements WebMvcConfigurer {
 
         Properties jpaProp = new Properties();
         jpaProp.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-        jpaProp.put("hibernate.auto_quote_keyword", "true");
         factoryBean.setJpaProperties(jpaProp);
 
         return factoryBean;
@@ -73,7 +75,7 @@ public class WebConfig implements WebMvcConfigurer {
     @Bean(name = "transactionManager")
     public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory);//entityManagerFactoryBean().getNativeEntityManagerFactory());
+        transactionManager.setEntityManagerFactory(entityManagerFactory);
         return transactionManager;
     }
 

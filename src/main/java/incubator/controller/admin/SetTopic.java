@@ -14,18 +14,45 @@ public class SetTopic {
     @Autowired
     TopicService topicService;
 
+    @GetMapping("/")
+    private String choose(Model model){
+        model.addAttribute("topics",topicService.getAllTopic());
+        return "admin/setTopic";
+    }
+
     @GetMapping("/{tId}")
-    public String addTopic(@PathVariable int tId, Model model){
+    public String setTopic(@PathVariable int tId, Model model){
         model.addAttribute("topic", topicService.getById(tId));
         return "admin/setTopic";
     }
 
-    @PostMapping("/{tId}")
-    public String addTopic(@RequestParam String name, @RequestParam String description,
+    @PostMapping("/{tId}/setDescription")
+    public String setDescription(@RequestParam String description,
                            Model model, @PathVariable int tId){
-        topicService.getById(tId).setDescription(description);
-        topicService.getById(tId).setName(name);
+        Topic topic = topicService.getById(tId);
+        topic.setDescription(description);
+        topicService.updateDescription(topic);
+        model.addAttribute("topic", topicService.getById(tId));
         model.addAttribute("result", "topic was set");
         return "admin/setTopic";
+    }
+
+    @PostMapping("/{tId}/setName")
+    public String setName(@RequestParam String name,
+                           Model model, @PathVariable int tId){
+        Topic topic = topicService.getById(tId);
+        topic.setName(name);
+        topicService.updateName(topic);
+        model.addAttribute("topic", topicService.getById(tId));
+        model.addAttribute("result", "topic was set");
+        return "admin/setTopic";
+    }
+
+    @PostMapping("/{tId}/deleteTopic")
+    public String setName(Model model, @PathVariable int tId){
+        Topic topic = topicService.getById(tId);
+        topicService.deleteTopic(topic);
+        model.addAttribute("result", "topic was set");
+        return "redirect:/admin/home";
     }
 }

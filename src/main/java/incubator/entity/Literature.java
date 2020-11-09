@@ -11,6 +11,14 @@ public class Literature implements Serializable {
     private int literatureId;
     private String description;
 
+    @Transient
+    private int questionId;
+
+    public Literature(String description, int questionId) {
+        this.description = description;
+        this.questionId = questionId;
+    }
+
     @ManyToOne
     @JoinColumn(name = "questionId")
     private Question question;

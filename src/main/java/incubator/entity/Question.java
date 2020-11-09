@@ -2,11 +2,27 @@ package incubator.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "question")
 public class Question implements Serializable {
 
+    public Question(int testId, String description) {
+        this.testId = testId;
+        this.description = description;
+    }
+
+    public int getTestId() {
+        return testId;
+    }
+
+    public void setTestId(int testId) {
+        this.testId = testId;
+    }
+
+    @Transient
+    private int testId;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int questionId;
@@ -55,5 +71,20 @@ public class Question implements Serializable {
                 ", description='" + description + '\'' +
                 ", test=" + test +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Question question = (Question) o;
+        return questionId == question.questionId &&
+                description.equals(question.description) &&
+                test.equals(question.test);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(questionId, description, test);
     }
 }

@@ -1,6 +1,7 @@
 package incubator.configurations;
 
-import incubator.service.user.UserDetailServiceImpl;
+
+import incubator.service.serviceForSecurity.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private UserDetailServiceImpl userDetailService;
 
     @Override
-    public void configure(WebSecurity web) {
+    public void configure(WebSecurity web) throws Exception {
         web.ignoring()
                 .antMatchers("/resources/css/**");
     }

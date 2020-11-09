@@ -1,5 +1,6 @@
 <%@ page import="incubator.entity.User" %>
-<%@ page import="java.util.List" %><%--
+<%@ page import="java.util.List" %>
+<%--
   Created by IntelliJ IDEA.
   User: Korona
   Date: 25.10.2020

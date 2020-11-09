@@ -41,7 +41,7 @@
             </c:forEach>
         </table>
     </div>
-    <form action="/homeUser">
+    <form action="/user/home">
         <input class="myButton" type="submit" value="HomePage">
     </form>
     <div class="exit">
