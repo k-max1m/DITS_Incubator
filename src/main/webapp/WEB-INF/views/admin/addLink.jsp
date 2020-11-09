@@ -23,7 +23,7 @@
                 <option value=<%= literature.getLiteratureId() %>> <%= literature.getDescription() %></option>
                 <% } %>
             </select><br>
-            <input name="submit" type="submit" class="myButton" value="submit"/>
+            <input name="submit" type="submit" class="myButton" value="add link"/>
         </form:form>
     </div>
     <div class="toMain">

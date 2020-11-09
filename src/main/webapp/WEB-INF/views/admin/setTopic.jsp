@@ -25,15 +25,15 @@ else {%>
 <%}%>
             <div class="loginForm">
             <form:form action="/admin/setTopic/${tId}/setName" method="POST">
-    <input type="text" class="input-style" name="name" placeholder="name"/>
-    <input name="submit"  type="submit" class="myButton" value="submit"/>
+    <input type="text" class="input-style" name="name" placeholder="name" value=<%=topic.getName()%>/>
+    <input name="submit"  type="submit" class="myButton" value="change name"/>
 </form:form>
 <form:form action="/admin/setTopic/${tId}/setDescription/" method="POST">
-    <input type="text" class="input-style" name="description" placeholder="description"/>
-    <input name="submit" type="submit" class="myButton" value="submit"/>
+    <input type="text" class="input-style" name="description" placeholder="description" value=<%=topic.getDescription()%>/>
+    <input name="submit" type="submit" class="myButton" value="change description"/>
 </form:form>
                 <form:form action="/admin/setTopic/${tId}/deleteTopic/" method="POST">
-                    <input name="submit" type="submit" class="myButton" value="submit"/>
+                    <input name="submit" type="submit" class="myButton" value="delete"/>
                 </form:form>
             </div>
 <%}%>

@@ -25,20 +25,20 @@ else {%>
 <%}%>
     <div class="loginForm">
 <form:form action="/admin/setUser/${uId}/setFirstName/" method="POST" name="userForm">
-    <input type="text" class="input-style" name="firstName" placeholder="firstName"/><br>
-    <input name="submit" type="submit" class="myButton" value="submit"/>
+    <input type="text" class="input-style" name="firstName" placeholder="firstName" value=<%=user.getFirstName()%>/><br>
+    <input name="submit" type="submit" class="myButton" value="change first name"/>
 </form:form>
 <form:form action="/admin/setUser/${uId}/setLastName/" method="POST" name="userForm">
-    <input type="text" class="input-style" name="lastName" placeholder="lastName"/><br>
-    <input name="submit" type="submit" class="myButton" value="submit"/>
+    <input type="text" class="input-style" name="lastName" placeholder="lastName" value=<%=user.getLastName()%> /><br>
+    <input name="submit" type="submit" class="myButton" value="change last name"/>
 </form:form>
 <form:form action="/admin/setUser/${uId}/setLogin/" method="POST">
-    <input type="text" class="input-style" name="login" placeholder="login"/><br>
-    <input name="submit" type="submit" class="myButton" value="submit"/>
+    <input type="text" class="input-style" name="login" placeholder="login" value=<%=user.getLogin()%>/><br>
+    <input name="submit" type="submit" class="myButton" value="change login"/>
 </form:form>
 <form:form action="/admin/setUser/${uId}/setPassword/" method="POST">
     <input type="password" class="input-style" name="password" placeholder="password"/><br>
-    <input name="submit" type="submit" class="myButton" value="submit"/>
+    <input name="submit" type="submit" class="myButton" value="change password"/>
 </form:form>
 <form:form action="/admin/setUser/${uId}/setRole/" method="POST">
     <select name="roleId" class="input-style">
@@ -46,10 +46,10 @@ else {%>
         <option value="1">Tutor</option>
         <option value="3">User</option>
     </select><br>
-    <input name="submit" type="submit" class="myButton" value="submit"/>
+    <input name="submit" type="submit" class="myButton" value="change role"/>
 </form:form>
         <form:form action="/admin/setUser/${uId}/deleteUser/" method="POST">
-            <input name="submit" type="submit" class="myButton" value="submit"/>
+            <input name="submit" type="submit" class="myButton" value="delete"/>
         </form:form>
     </div>
 <%}%>

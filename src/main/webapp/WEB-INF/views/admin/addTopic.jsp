@@ -16,7 +16,7 @@
     <form:form action="/admin/addTopic/" method="POST" name="topicForm">
         <input type="text" class="input-style" name="name" placeholder="name"/>
         <input type="text" class="input-style" name="description" placeholder="description"/>
-        <input name="submit" type="submit" class="myButton" value="submit"/>
+        <input name="submit" type="submit" class="myButton" value="add topic"/>
     </form:form>
     </div>
     <div class="toMain">

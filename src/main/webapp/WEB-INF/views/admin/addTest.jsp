@@ -25,7 +25,7 @@
                     <option value=<%=topic.getTopicId()%>> <%= topic.getName() %></option>
                     <% } %>
                 </select>
-                <input name="submit" type="submit" class="myButton" value="submit"/>
+                <input name="submit" type="submit" class="myButton" value="add test"/>
             </form:form>
                 </div>
             <div class="toMain">
