@@ -73,7 +73,6 @@ public class MainController {
     @PostMapping("/registration")
     public String getRegistration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model){
         userForm.setRole(roleService.getRoleById(3));
-        userDetailService.save(userForm);
         if (bindingResult.hasErrors()) {
             model.addAttribute("usernameError", bindingResult.getAllErrors().toString());
             return "registration";
