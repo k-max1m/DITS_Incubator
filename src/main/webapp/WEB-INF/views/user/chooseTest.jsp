@@ -21,7 +21,7 @@
     </div>
     <div class="chooseTest">
         <div>
-            <form action="/goToTest">
+            <form class="width300" action="/goToTest">
                 <select class="select" id="themes" name="themes">
                     <c:forEach items="${topics}" var="topic">
                         <option>${topic.name}</option>

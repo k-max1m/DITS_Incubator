@@ -1,6 +1,7 @@
 DROP DATABASE IF EXISTS `dits`;
 CREATE DATABASE IF NOT EXISTS `dits`;
 DEFAULT CHARACTER SET utf8;
+default collate utf8_general_ci;
 USE `dits`;
 
 
@@ -94,6 +95,8 @@ CREATE TABLE IF NOT EXISTS `dits`.`link` (
  
 INSERT INTO `dits`.`topic` (`topicId`, `description`, `name`) VALUES ('1', 'description1', 'topic1');
 INSERT INTO `dits`.`topic` (`topicId`, `description`, `name`) VALUES ('2', 'description2', 'topic2');
+INSERT INTO `dits`.`topic` (`topicId`, `description`, `name`) VALUES ('3', '6 класс', 'Математика');
+
 
 INSERT INTO `dits`.`role` (`roleId`, `tutor`, `user`, `admin`) VALUES ('1', '1', '0', '0');
 INSERT INTO `dits`.`role` (`roleId`, `tutor`, `user`, `admin`) VALUES ('2', '0', '0', '1');
@@ -108,6 +111,8 @@ INSERT INTO `dits`.`test` (`testId`, `name`, `description`, `topicId`) VALUES ('
 INSERT INTO `dits`.`test` (`testId`, `name`, `description`, `topicId`) VALUES ('2', 'test2', 'description2', '1');
 INSERT INTO `dits`.`test` (`testId`, `name`, `description`, `topicId`) VALUES ('3', 'test3', 'description3', '2');
 INSERT INTO `dits`.`test` (`testId`, `name`, `description`, `topicId`) VALUES ('4', 'test4', 'description4', '2');
+INSERT INTO `dits`.`test` (`testId`, `name`, `description`, `topicId`) VALUES ('5', 'Сложение и вычитание', 'Тест на сложение', '3');
+
 
 INSERT INTO `dits`.`question` (`questionId`, `description`, `testId`) VALUES ('1', 'question1', '1');
 INSERT INTO `dits`.`question` (`questionId`, `description`, `testId`) VALUES ('2', 'question2', '1');
@@ -117,6 +122,11 @@ INSERT INTO `dits`.`question` (`questionId`, `description`, `testId`) VALUES ('5
 INSERT INTO `dits`.`question` (`questionId`, `description`, `testId`) VALUES ('6', 'question2', '3');
 INSERT INTO `dits`.`question` (`questionId`, `description`, `testId`) VALUES ('7', 'question1', '4');
 INSERT INTO `dits`.`question` (`questionId`, `description`, `testId`) VALUES ('8', 'question2', '4');
+INSERT INTO `dits`.`question` (`questionId`, `description`, `testId`) VALUES ('9', 'Сколько будет -7+(-4)', '5');
+INSERT INTO `dits`.`question` (`questionId`, `description`, `testId`) VALUES ('10', 'Сколько будет 6+2*8', '5');
+INSERT INTO `dits`.`question` (`questionId`, `description`, `testId`) VALUES ('11', 'Сколько будет 8 + 4*2', '5');
+INSERT INTO `dits`.`question` (`questionId`, `description`, `testId`) VALUES ('12', 'Сколько будет 7*7-49', '5');
+
 
 INSERT INTO `dits`.`statistic` (`statisticId`, `date`, `correct`, `questionId`, `userId`) VALUES ('1', '2020-10-22', '1', '1','1');
 INSERT INTO `dits`.`statistic` (`statisticId`, `date`, `correct`, `questionId`, `userId`) VALUES ('2', '2020-10-22', '1', '3','1');
@@ -161,7 +171,23 @@ INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`,
 INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`,`userId`) VALUES ('30', 'description9', '0', '8', 1);
 INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`,`userId`) VALUES ('31', 'description10', '0', '8', 1);
 INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`,`userId`) VALUES ('32', 'description10', '0', '8', 2);
-  
+INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`, `userId`) VALUES ('33', '-12', '0', '9', '3');
+INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`, `userId`) VALUES ('34', '-11', '1', '9', '3');
+INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`, `userId`) VALUES ('35', '-3', '0', '9', '3');
+INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`, `userId`) VALUES ('36', '3', '0', '9', '3');
+INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`, `userId`) VALUES ('37', '18', '0', '10', '3');
+INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`, `userId`) VALUES ('38', '21', '0', '10', '3');
+INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`, `userId`) VALUES ('39', '22', '1', '10', '3');
+INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`, `userId`) VALUES ('40', '64', '0', '10', '3');
+INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`, `userId`) VALUES ('41', '16', '1', '11', '3');
+INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`, `userId`) VALUES ('42', '24', '0', '11', '3');
+INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`, `userId`) VALUES ('43', '20', '0', '11', '3');
+INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`, `userId`) VALUES ('44', '18', '0', '11', '3');
+INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`, `userId`) VALUES ('45', '-45', '0', '12', '3');
+INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`, `userId`) VALUES ('46', '0', '1', '12', '3');
+INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`, `userId`) VALUES ('47', '49', '0', '12', '3');
+INSERT INTO `dits`.`answer` (`answerId`, `description`, `correct`, `questionId`, `userId`) VALUES ('48', '0', '1', '12', '3');
+
 INSERT INTO `dits`.`literature` (`literatureId`, `description`, `questionId`) VALUES ('1', 'description1', '1');
 INSERT INTO `dits`.`literature` (`literatureId`, `description`, `questionId`) VALUES ('2', 'description2', '2');
 INSERT INTO `dits`.`literature` (`literatureId`, `description`, `questionId`) VALUES ('3', 'description3', '3');
@@ -170,6 +196,10 @@ INSERT INTO `dits`.`literature` (`literatureId`, `description`, `questionId`) VA
 INSERT INTO `dits`.`literature` (`literatureId`, `description`, `questionId`) VALUES ('6', 'description6', '6');
 INSERT INTO `dits`.`literature` (`literatureId`, `description`, `questionId`) VALUES ('7', 'description7', '7');
 INSERT INTO `dits`.`literature` (`literatureId`, `description`, `questionId`) VALUES ('8', 'description8', '8');
+INSERT INTO `dits`.`literature` (`literatureId`, `description`, `questionId`) VALUES ('9', 'Учебник Математика 6 класс', '9');
+INSERT INTO `dits`.`literature` (`literatureId`, `description`, `questionId`) VALUES ('10', 'Учебник Математика 6 класс', '10');
+INSERT INTO `dits`.`literature` (`literatureId`, `description`, `questionId`) VALUES ('11', 'Учебник Математика 6 класс', '11');
+INSERT INTO `dits`.`literature` (`literatureId`, `description`, `questionId`) VALUES ('12', 'Учебник Математика 6 класс', '12');
 
 INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('1', 'link1', '1');
 INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('2', 'link2', '2');
@@ -179,6 +209,11 @@ INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('5', 'link5
 INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('6', 'link6', '6');
 INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('7', 'link7', '7');
 INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('8', 'link8', '8');
+INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('9', 'https://vklasse.vip/6-klass/uchebniki/matematika/ma-popov-2017-didakticheskie-materialy', '9');
+INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('10', 'https://vklasse.vip/6-klass/uchebniki/matematika/ma-popov-2017-didakticheskie-materialy', '10');
+INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('11', 'https://vklasse.vip/6-klass/uchebniki/matematika/ma-popov-2017-didakticheskie-materialy', '11');
+INSERT INTO `dits`.`link` (`linkId`, `link`, `literatureId`) VALUES ('12', 'https://vklasse.vip/6-klass/uchebniki/matematika/ma-popov-2017-didakticheskie-materialy', '12');
+
 
 
 CREATE OR REPLACE VIEW `dits`.`user_statistic` AS

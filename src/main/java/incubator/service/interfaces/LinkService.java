@@ -1,5 +1,6 @@
 package incubator.service.interfaces;
 
+import incubator.entity.Answer;
 import incubator.entity.Link;
 import incubator.entity.Literature;
 
@@ -13,5 +14,7 @@ public interface LinkService {
     void save(Link link);
 
     List<Link> getByLiteratureId(int id);
+
+
 
 }

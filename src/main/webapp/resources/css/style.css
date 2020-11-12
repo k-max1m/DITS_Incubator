@@ -125,6 +125,11 @@
     color: #4e82be;
     border-style: solid;
     margin-bottom: 20px;
+    word-wrap: break-word;
+}
+
+.width300 {
+    width: 300px;
 }
 
 .hidden {

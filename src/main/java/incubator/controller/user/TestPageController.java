@@ -1,5 +1,6 @@
 package incubator.controller.user;
 
+import incubator.entity.Answer;
 import incubator.entity.Question;
 import incubator.service.interfaces.AnswerService;
 import incubator.service.interfaces.QuestionService;
@@ -21,7 +22,7 @@ public class TestPageController {
     private AnswerService answerService;
     private TestService testService;
     private List<Question> questionsList;
-    private Map<Question, List<Boolean>> correctQuestion;
+    private Map<Question, List<Integer>> correctQuestion;
 
     @Autowired
     public TestPageController(QuestionService questionService, AnswerService answerService, TestService testService) {
@@ -42,10 +43,10 @@ public class TestPageController {
     }
 
     @GetMapping("/nextPage")
-    public String getNextPage(@RequestParam Integer page, @RequestParam List<Boolean> correct,
+    public String getNextPage(@RequestParam Integer page, @RequestParam List<Integer> answer,
                               ModelMap map, RedirectAttributes redirectAttributes) {
-        System.out.println(correct);
-        correctQuestion.put(questionsList.get(page - 1), correct);
+        System.out.println(answer);
+        correctQuestion.put(questionsList.get(page - 1), answer);
         if (page >= questionsList.size()) {
             Map<String, Object> redirectMap = new HashMap<>();
             redirectMap.put("page", page);

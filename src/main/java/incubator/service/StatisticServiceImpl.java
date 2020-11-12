@@ -3,6 +3,7 @@ package incubator.service;
 import incubator.entity.*;
 import incubator.repository.StatisticRepos;
 import incubator.repository.UserRepos;
+import incubator.service.interfaces.AnswerService;
 import incubator.service.interfaces.LinkService;
 import incubator.service.interfaces.LiteratureService;
 import incubator.service.interfaces.StatisticService;
@@ -23,19 +24,21 @@ public class StatisticServiceImpl implements StatisticService {
     private LinkService linkService;
     private StatisticRepos statisticRepos;
     private UserRepos userRepos;
+    private AnswerService answerService;
 
     @Autowired
-    public StatisticServiceImpl(LiteratureService literatureService, LinkService linkService, StatisticRepos statisticRepos, UserRepos userRepos) {
+    public StatisticServiceImpl(LiteratureService literatureService, LinkService linkService, StatisticRepos statisticRepos, UserRepos userRepos, AnswerService answerService) {
         this.literatureService = literatureService;
         this.linkService = linkService;
         this.statisticRepos = statisticRepos;
         this.userRepos = userRepos;
+        this.answerService = answerService;
     }
 
     public Statistic getById(int id){return statisticRepos.findById(id).get();}
 
     @Override
-    public List<List<Object>> saveResultTest(Map<Question, List<Boolean>> correctQuestion) {
+    public List<List<Object>> saveResultTest(Map<Question, List<Integer>> correctQuestion) {
         Date date = new Date();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
@@ -43,17 +46,12 @@ public class StatisticServiceImpl implements StatisticService {
 
 
         List<List<Object>> resultList = new ArrayList<>();
-        for (Map.Entry<Question, List<Boolean>> question : correctQuestion.entrySet()) {
-            boolean fail = false;
-            for (Boolean bool : question.getValue()) {
-                if (!bool) {
-                    fail = true;
-                    break;
-                }
-            }
+        for (Map.Entry<Question, List<Integer>> question : correctQuestion.entrySet()) {
+            boolean fail = answerService.getCorrectByAnswersIds(question.getKey(), question.getValue());
+
             List<Object> stepList = new ArrayList<>();
             String right = "";
-            if (fail) {
+            if (!fail) {
                 stepList.add(question.getKey().getDescription());
                 right = "-";
                 stepList.add(right);
@@ -64,6 +62,9 @@ public class StatisticServiceImpl implements StatisticService {
                         .map(Link::getLink).collect(Collectors.toList()));
                 resultList.add(stepList);
             }
+
+            Statistic statistic = new Statistic(date, fail, question.getKey(), user);
+            Statistic save = statisticRepos.saveAndFlush(statistic);
         }
 
         double allAnswer = correctQuestion.size();
@@ -73,18 +74,6 @@ public class StatisticServiceImpl implements StatisticService {
         res.add(String.format("%.2f", resultTest));
 
         resultList.add(res);
-
-        correctQuestion.forEach((key, value) -> {
-            boolean right = true;
-            for(Boolean bool: value) {
-                if (!bool) {
-                    right = false;
-                    break;
-                }
-            }
-            Statistic statistic = new Statistic(date, right, key, user);
-            Statistic save = statisticRepos.saveAndFlush(statistic);
-        });
 
         return resultList;
     }

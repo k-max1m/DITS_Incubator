@@ -26,7 +26,7 @@
                 </label>
                 <c:forEach items="${answers}" var="answer">
                     <div class="answer">
-                        <input id= "${answer.answerId}" type="checkbox" class="hidden" name="correct" value="${answer.correct}">
+                        <input id= "${answer.answerId}" type="checkbox" class="hidden" name="answer" value="${answer.answerId}">
                         <label for="${answer.answerId}">
                             ${answer.description}
                         </label>

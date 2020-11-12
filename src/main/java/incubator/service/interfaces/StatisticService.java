@@ -11,7 +11,7 @@ import java.util.Map;
 public interface StatisticService {
     Statistic getById(int id);
 
-    List<List<Object>> saveResultTest(Map<Question, List<Boolean>> resultMap);
+    List<List<Object>> saveResultTest(Map<Question, List<Integer>> resultMap);
 
     List<Statistic> getByUser(User user);
 

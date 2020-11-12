@@ -15,4 +15,7 @@ public interface AnswerService {
     Answer getByDescription(String description);
 
     void save(Answer answer);
+
+    boolean getCorrectByAnswersIds(Question question, List<Integer> answerId);
+
 }

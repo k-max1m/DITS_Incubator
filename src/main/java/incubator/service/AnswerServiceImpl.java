@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @Transactional
 public class AnswerServiceImpl implements AnswerService {
@@ -42,5 +44,26 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public void save(Answer answer) {
         answerRepos.save(answer);
+    }
+
+    @Override
+    public boolean getCorrectByAnswersIds(Question question, List<Integer> answerId) {
+        boolean correct = true;
+
+        List<Integer> answerIdCorrect = answerRepos.findByQuestion(question).stream()
+                .filter(Answer::isCorrect)
+                .map(Answer::getAnswerId)
+                .collect(Collectors.toList());
+
+        if(!(answerId.size() == answerIdCorrect.size())) {
+            return false;
+        }
+        for (Integer id : answerId) {
+            if (!(answerIdCorrect.contains(id))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
