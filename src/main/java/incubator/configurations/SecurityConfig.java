@@ -12,6 +12,9 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import sun.misc.CharacterEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -35,6 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
+        CharacterEncodingFilter encoder = new CharacterEncodingFilter();
+        encoder.setEncoding("UTF-8");
+        encoder.setForceEncoding(true);
+        httpSecurity.addFilterBefore(encoder, CsrfFilter.class);
 
         httpSecurity.csrf().disable().authorizeRequests()
                 .antMatchers("/","/registration", "/login")

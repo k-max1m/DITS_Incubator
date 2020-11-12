@@ -28,8 +28,11 @@ public class ResultTest {
 
     @GetMapping("/resultTest")
     public String resultPage(ModelMap map, @ModelAttribute("redirectMap") Map<String, Object> redirectMap) {
-        Map<Question, Boolean> correctQuestion = (Map<Question, Boolean>) redirectMap.get("correctQuestion");
+        Map<Question, List<Boolean>> correctQuestion = (Map<Question, List<Boolean>>) redirectMap.get("correctQuestion");
         List<List<Object>> resultList = statisticService.saveResultTest(correctQuestion);
+        String correct = (String) resultList.get(resultList.size() - 1).get(0);
+        resultList.remove(resultList.size() - 1);
+        map.put("correct", correct);
         map.put("resultList", resultList);
         return "user/resultPage";
     }

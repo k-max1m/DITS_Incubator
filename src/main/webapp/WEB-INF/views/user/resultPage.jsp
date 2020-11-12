@@ -16,33 +16,38 @@
 <body>
 <div class="myCount">
     <div>
-        <table>
-            <tr>
-                <th>Question</th>
-                <th>Right</th>
-                <th>Recommend literature</th>
-                <th>Link to literature</th>
-            </tr>
-            <c:forEach items="${resultList}" var="result">
+        <h1 class="link marginTop">Процент правильных ответов: ${correct}</h1>
+        <c:if test="${resultList.size() > 0}">
+
+            <table class="marginTopTwo">
                 <tr>
-                    <td>${result.get(0)}</td>
-                    <td>${result.get(1)}</td>
-                    <td>
-                        <c:forEach items="${result.get(2)}" var="res">
-                            <p>${res}</p>
-                        </c:forEach>
-                    </td>
-                    <td>
-                        <c:forEach items="${result.get(3)}" var="res">
-                            <p><a href="${res}">${res}</a></p>
-                        </c:forEach>
-                    </td>
+                    <th colspan="3">Вопросы с неправильным ответом:</th>
                 </tr>
-            </c:forEach>
-        </table>
+                <tr>
+                    <th>Вопрос</th>
+                    <th>Рекомендуемая литература</th>
+                    <th>Ссылка на литературу</th>
+                </tr>
+                <c:forEach items="${resultList}" var="result">
+                    <tr>
+                        <td>${result.get(0)}</td>
+                        <td>
+                            <c:forEach items="${result.get(2)}" var="res">
+                                <p>${res}</p>
+                            </c:forEach>
+                        </td>
+                        <td>
+                            <c:forEach items="${result.get(3)}" var="res">
+                                <p><a href="${res}">${res}</a></p>
+                            </c:forEach>
+                        </td>
+                    </tr>
+                </c:forEach>
+            </table>
+        </c:if>
     </div>
     <form action="/user/home">
-        <input class="myButton" type="submit" value="HomePage">
+        <input class="myButton" type="submit" value="Главная страница">
     </form>
     <div class="exit">
         <a class="link" href="/logout">Выйти</a>

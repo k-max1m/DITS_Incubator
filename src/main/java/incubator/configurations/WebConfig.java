@@ -26,7 +26,7 @@ import java.util.Properties;
 @EnableJpaRepositories("incubator.repository")
 @EnableTransactionManagement
 public class WebConfig implements WebMvcConfigurer {
-    private String url = "jdbc:mysql://localhost:8500/dits?serverTimezone=Europe/Moscow&useSSL=false";
+    private String url = "jdbc:mysql://localhost:8500/dits?serverTimezone=Europe/Moscow&useSSL=false&characterEncoding=UTF-8";
     private String driverClassName = "com.mysql.jdbc.Driver";
     private String userName = "root";
     private String password = "Maxkozlov2mailru";

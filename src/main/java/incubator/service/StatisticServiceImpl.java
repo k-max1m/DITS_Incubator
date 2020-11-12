@@ -13,10 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -38,37 +35,55 @@ public class StatisticServiceImpl implements StatisticService {
     public Statistic getById(int id){return statisticRepos.findById(id).get();}
 
     @Override
-    public List<List<Object>> saveResultTest(Map<Question, Boolean> correctQuestion) {
+    public List<List<Object>> saveResultTest(Map<Question, List<Boolean>> correctQuestion) {
         Date date = new Date();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userName = authentication.getName();
         User user = userRepos.findByLogin(userName);
 
+
         List<List<Object>> resultList = new ArrayList<>();
-        for (Map.Entry<Question, Boolean> question : correctQuestion.entrySet()) {
-            List<Object> stepList = new ArrayList<>();
-            stepList.add(question.getKey().getDescription());
-            String right = "";
-            if (question.getValue()) {
-                right = "+";
-            } else {
-                right = "-";
+        for (Map.Entry<Question, List<Boolean>> question : correctQuestion.entrySet()) {
+            boolean fail = false;
+            for (Boolean bool : question.getValue()) {
+                if (!bool) {
+                    fail = true;
+                    break;
+                }
             }
-            stepList.add(right);
-            List<Literature> literature = literatureService.getAllByQuestion(question.getKey());
-            System.out.println(literature.size());
-            stepList.add(literature.stream().map(Literature::getDescription).collect(Collectors.toList()));
-            stepList.add(linkService.getAllByLiterature(literature).stream()
-                    .map(Link::getLink).collect(Collectors.toList()));
-            resultList.add(stepList);
+            List<Object> stepList = new ArrayList<>();
+            String right = "";
+            if (fail) {
+                stepList.add(question.getKey().getDescription());
+                right = "-";
+                stepList.add(right);
+                List<Literature> literature = literatureService.getAllByQuestion(question.getKey());
+                System.out.println(literature.size());
+                stepList.add(literature.stream().map(Literature::getDescription).collect(Collectors.toList()));
+                stepList.add(linkService.getAllByLiterature(literature).stream()
+                        .map(Link::getLink).collect(Collectors.toList()));
+                resultList.add(stepList);
+            }
         }
 
-        correctQuestion.forEach((key, value) -> {
-            Statistic statistic = new Statistic(date, value, key, user);
-            System.out.println(user);
-            Statistic save = statisticRepos.saveAndFlush(statistic);
-            System.out.println(save);
+        double allAnswer = correctQuestion.size();
+        double incorrectAnswer = resultList.size();
+        double resultTest = (allAnswer - incorrectAnswer)/allAnswer * 100;
+        List<Object> res = new ArrayList<>(1);
+        res.add(String.format("%.2f", resultTest));
 
+        resultList.add(res);
+
+        correctQuestion.forEach((key, value) -> {
+            boolean right = true;
+            for(Boolean bool: value) {
+                if (!bool) {
+                    right = false;
+                    break;
+                }
+            }
+            Statistic statistic = new Statistic(date, right, key, user);
+            Statistic save = statisticRepos.saveAndFlush(statistic);
         });
 
         return resultList;

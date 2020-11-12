@@ -36,7 +36,7 @@
         </table>
     </div>
     <form action="/user/home">
-        <input class="myButton" type="submit" value="Home page">
+        <input class="myButton" type="submit" value="Домашняя страница">
     </form>
     <div class="exit">
         <a class="link" href="/logout">Выйти</a>

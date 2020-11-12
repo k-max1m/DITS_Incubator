@@ -26,7 +26,7 @@
                 </label>
                 <c:forEach items="${answers}" var="answer">
                     <div class="answer">
-                        <input id= "${answer.answerId}" type="radio" class="hidden" name="correct" value="${answer.correct}">
+                        <input id= "${answer.answerId}" type="checkbox" class="hidden" name="correct" value="${answer.correct}">
                         <label for="${answer.answerId}">
                             ${answer.description}
                         </label>
@@ -36,7 +36,7 @@
             </div>
             <div>
                 <input type="hidden" name="page" value="${page}">
-                <input class="myButton" type="submit" value="Next Page">
+                <input class="myButton" type="submit" value="Следующая страница">
             </div>
         </form>
     </div>

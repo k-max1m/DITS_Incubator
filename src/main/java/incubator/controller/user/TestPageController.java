@@ -21,7 +21,7 @@ public class TestPageController {
     private AnswerService answerService;
     private TestService testService;
     private List<Question> questionsList;
-    private Map<Question, Boolean> correctQuestion;
+    private Map<Question, List<Boolean>> correctQuestion;
 
     @Autowired
     public TestPageController(QuestionService questionService, AnswerService answerService, TestService testService) {
@@ -42,8 +42,9 @@ public class TestPageController {
     }
 
     @GetMapping("/nextPage")
-    public String getNextPage(@RequestParam Integer page, @RequestParam Boolean correct,
+    public String getNextPage(@RequestParam Integer page, @RequestParam List<Boolean> correct,
                               ModelMap map, RedirectAttributes redirectAttributes) {
+        System.out.println(correct);
         correctQuestion.put(questionsList.get(page - 1), correct);
         if (page >= questionsList.size()) {
             Map<String, Object> redirectMap = new HashMap<>();
