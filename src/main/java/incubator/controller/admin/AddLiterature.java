@@ -30,6 +30,7 @@ public class AddLiterature {
                           Model model){
         litForm.setQuestion(questionService.getByQuestionId(litForm.getLiteratureId()));
         literatureService.save(litForm);
+        model.addAttribute("questions",questionService.getAllQuestion());
         model.addAttribute("result","question added successfully");
         return("admin/addLiterature");
     }

@@ -73,8 +73,5 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateRole(User user) {
-        userRepos.updateRole(user.getRole(), user.getUserId());
-
-    }
+    public void updateRole(User user) { userRepos.updateRole(user.getRole(), user.getUserId()); }
 }

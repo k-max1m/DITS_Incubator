@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/admin/addTopic")
 public class AddTopic {
@@ -21,7 +24,10 @@ public class AddTopic {
     @PostMapping("/")
     public String addTopic(@ModelAttribute("topicForm") Topic topicForm, Model model){
         topicService.save(topicForm);
+        List<Topic> topics = new ArrayList<>();
+        topics.add(topicService.getByDescription(topicForm.getDescription()));
+        model.addAttribute("topics", topics);
         model.addAttribute("result", "topic was added successfully");
-        return "admin/addTopic";
+        return "admin/addTest";
     }
 }

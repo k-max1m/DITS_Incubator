@@ -27,7 +27,7 @@
         </form:form>
             </div>
             <div class="toMain">
-                <a class="link" href="/main">Выйти</a>
+                <a class="link" href="/main">На главную</a>
             </div>
             <div class="exit">
                 <a class="link" href="/logout">Выйти</a>

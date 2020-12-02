@@ -12,7 +12,6 @@ import java.security.Principal;
 public class AdminHome {
     @GetMapping("/home")
     public String homePage(Model model, Principal principal) {
-        model.addAttribute("name", principal.getName());
         return "admin/admin_home";
     }
 }
