@@ -27,7 +27,7 @@
     <%}%>
     <div class="loginForm">
         <form:form action="/admin/setLiterature/${lId}/setDescription/" method="POST">
-            <input type="text" class="input-style" name="description" placeholder="description" value=<%=literature.getDescription()%>/>
+            <input type="text" class="input-style" name="description" placeholder="description" value=<%=literature.getDescription()%> />
             <input name="submit" type="submit" class="myButton" value="change description"/>
         </form:form>
         <% List<Question> questions = (List<Question>) request.getAttribute("questions"); %>

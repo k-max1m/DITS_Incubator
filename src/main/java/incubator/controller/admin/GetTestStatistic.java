@@ -37,7 +37,6 @@ public class GetTestStatistic {
         Test test = testService.getById(tId);
         for(Question question: questionService.getAllByTest(test)){
             statistic.put(question, statisticService.getByQuestion(question));
-
         }
         model.addAttribute("statistic", statistic);
         return "admin/testStatistic";

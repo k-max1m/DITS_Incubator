@@ -23,6 +23,7 @@
                             <option value=<%= test.getTestId() %>><%= test.getName() %></option>
                             <% } %>
                         </select><br>
+                        <input type="checkbox" class="input-style" name="retry"> <span class="link">Add more questions</span><br>
                         <input name="submit" type="submit" class="myButton" value="add question"/>
                     </form:form>
             </div>

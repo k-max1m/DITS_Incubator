@@ -27,6 +27,8 @@ public class TopicServiceImpl implements TopicService {
         return topicRepos.findAll();
     }
 
+    public Topic getByDescription(String description) {return topicRepos.findByDescription(description);}
+
     @Override
     public void save(Topic topic) {
         topicRepos.save(topic);

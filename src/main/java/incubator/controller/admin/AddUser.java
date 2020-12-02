@@ -3,6 +3,7 @@ package incubator.controller.admin;
 import incubator.entity.Role;
 import incubator.entity.User;
 import incubator.repository.RoleRepos;
+import incubator.service.interfaces.RoleService;
 import incubator.service.interfaces.UserService;
 import incubator.service.serviceForSecurity.UserDetailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/admin/addUser")
 public class AddUser {
     @Autowired
-    UserService userService;
-    @Autowired
     UserDetailServiceImpl userDetailService;
     @Autowired
-    RoleRepos roleRepos;
+    RoleService roleService;
 
     @GetMapping("/")
     public String addUser() {
@@ -30,7 +29,7 @@ public class AddUser {
 
     @PostMapping("/")
     public String addUser(@ModelAttribute("userForm") User userForm, Model model) {
-        userForm.setRole(roleRepos.getByRoleId(userForm.getRoleId()));
+        userForm.setRole(roleService.getRoleById(userForm.getRoleId()));
         userDetailService.save(userForm);
         model.addAttribute("result", "user was added successfully");
         return "admin/addUser";

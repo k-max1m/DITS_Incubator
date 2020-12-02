@@ -16,4 +16,7 @@ public interface TopicService {
     void updateName(Topic topic);
 
     void deleteTopic(Topic topic);
+
+    Topic getByDescription(String description);
+
 }

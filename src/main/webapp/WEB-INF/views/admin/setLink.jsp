@@ -28,7 +28,7 @@
     <%}%>
     <div class="loginForm">
         <form:form action="/admin/setLink/${lId}/setLink/" method="POST">
-            <input type="text" class="input-style" name="link" placeholder="link" value=<%= link.getLink()%>/>
+            <input type="text" class="input-style" name="link" placeholder="link" value=<%= link.getLink()%> />
             <input name="submit" type="submit" class="myButton" value="submit"/>
         </form:form>
         <% List<Literature> literatures = (List<Literature>) request.getAttribute("literatures"); %>

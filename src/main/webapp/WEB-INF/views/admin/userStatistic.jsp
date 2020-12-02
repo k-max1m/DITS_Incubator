@@ -24,7 +24,7 @@
             <table>
             <%for(Statistic statistic: statistics){%>
                 <tr>
-                    <td><%=statistic.getDate()%></td>
+                    <td><%=statistic.getDate().toString().replace(" 00:00:00.0","")%></td>
                     <td><%=statistic.getQuestion().getDescription()%></td>
                     <td><%=statistic.isCorrect()%></td>
                 </tr>

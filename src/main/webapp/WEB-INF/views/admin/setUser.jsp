@@ -25,7 +25,7 @@ else {%>
 <%}%>
     <div class="loginForm">
 <form:form action="/admin/setUser/${uId}/setFirstName/" method="POST" name="userForm">
-    <input type="text" class="input-style" name="firstName" placeholder="firstName" value=<%=user.getFirstName()%>/><br>
+    <input type="text" class="input-style" name="firstName" placeholder="firstName" value=<%=user.getFirstName()%> /><br>
     <input name="submit" type="submit" class="myButton" value="change first name"/>
 </form:form>
 <form:form action="/admin/setUser/${uId}/setLastName/" method="POST" name="userForm">
@@ -33,7 +33,7 @@ else {%>
     <input name="submit" type="submit" class="myButton" value="change last name"/>
 </form:form>
 <form:form action="/admin/setUser/${uId}/setLogin/" method="POST">
-    <input type="text" class="input-style" name="login" placeholder="login" value=<%=user.getLogin()%>/><br>
+    <input type="text" class="input-style" name="login" placeholder="login" value=<%=user.getLogin()%> /><br>
     <input name="submit" type="submit" class="myButton" value="change login"/>
 </form:form>
 <form:form action="/admin/setUser/${uId}/setPassword/" method="POST">

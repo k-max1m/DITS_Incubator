@@ -81,7 +81,7 @@ public class MainController {
             model.addAttribute("usernameError", "Пользователь с таким именем уже существует");
             return "registration";
         }
-        model.addAttribute("usernameError", "all will be ok!");
+        model.addAttribute("usernameError", "User with this Login has already exist!");
         return "registration";
 
     }

@@ -42,7 +42,7 @@
                                     for(Statistic statistic: qStatistics) {%>
                                             <tr>
                                                 <td>
-                                                    <%= statistic.getDate()%>
+                                                    <%= statistic.getDate().toString().replace(" 00:00:00.0","")%>
                                                 </td>
                                                 <td>
                                                     <%= statistic.getUser().getLogin()%>

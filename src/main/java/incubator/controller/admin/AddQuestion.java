@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/admin/addQuestion")
 public class AddQuestion {
@@ -24,10 +27,17 @@ public class AddQuestion {
 
     @PostMapping("/")
     public String addQuestion(@ModelAttribute("questionForm") Question questionForm,
-                              Model model){
+                             @RequestParam(value = "retry", defaultValue = "false") boolean retry, Model model){
         questionForm.setTest(testService.getById(questionForm.getTestId()));
         questionService.save(questionForm);
         model.addAttribute("result","question added successfully");
-        return("admin/addQuestion");
+        if (retry){
+            model.addAttribute("tests", testService.getAll());
+            return("admin/addQuestion");
+        }
+        List<Question> questions = new ArrayList<>();
+        questions.add(questionService.getByDescription(questionForm.getDescription()));
+        model.addAttribute("questions",questions);
+        return ("admin/addLiterature");
     }
 }

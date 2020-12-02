@@ -17,6 +17,8 @@ public interface TopicRepos extends JpaRepository<Topic, Integer> {
 
     List<Topic> getAllByName(String name);
 
+    Topic findByDescription(String description);
+
     @Modifying
     @Query("update Topic t set t.description = :value where t.topicId = :Id")
     void updateDescription(@Param(value = "value") String value, @Param(value = "Id") int Id);

@@ -1,7 +1,6 @@
 package incubator.controller.admin;
 
 import incubator.entity.Link;
-import incubator.entity.Question;
 import incubator.service.interfaces.LinkService;
 import incubator.service.interfaces.LiteratureService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +29,8 @@ public class AddLink {
                               Model model){
         linkForm.setLiterature(literatureService.getByLiteratureId(linkForm.getLiteratureId()));
         linkService.save(linkForm);
-        model.addAttribute("result","question added successfully");
+        model.addAttribute("literatures",literatureService.getAllLiterature());
+        model.addAttribute("result","link added successfully");
         return("admin/addLink");
     }
 }
