@@ -25,6 +25,7 @@
                     <option value=<%=topic.getTopicId()%>> <%= topic.getName() %></option>
                     <% } %>
                 </select>
+                <input type="checkbox" class="input-style" name="retry"> <span class="link">Add more questions</span><br>
                 <input name="submit" type="submit" class="myButton" value="add test"/>
             </form:form>
                 </div>
